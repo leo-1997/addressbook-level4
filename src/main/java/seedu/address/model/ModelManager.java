@@ -25,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     * test
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
