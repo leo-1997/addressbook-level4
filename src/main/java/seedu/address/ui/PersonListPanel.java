@@ -19,6 +19,7 @@ import seedu.address.model.issue.Issue;
  * Panel containing the list of persons.
  */
 public class PersonListPanel extends UiPart<Region> {
+
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
@@ -67,6 +68,7 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Issue} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Issue> {
+
         @Override
         protected void updateItem(Issue issue, boolean empty) {
             super.updateItem(issue, empty);

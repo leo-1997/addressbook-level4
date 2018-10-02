@@ -45,10 +45,11 @@ import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
- * A system test class for SaveIt, which provides access to handles of GUI components and helper methods
- * for test verification.
+ * A system test class for SaveIt, which provides access to handles of GUI components and helper methods for
+ * test verification.
  */
 public abstract class SaveItSystemTest {
+
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -124,8 +125,8 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Executes {@code command} in the application's {@code CommandBox}.
-     * Method returns after UI components have been updated.
+     * Executes {@code command} in the application's {@code CommandBox}. Method returns after UI components
+     * have been updated.
      */
     protected void executeCommand(String command) {
         rememberStates();
@@ -143,7 +144,8 @@ public abstract class SaveItSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getSaveIt().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getSaveIt().getPersonList().size(),
+                getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -171,11 +173,12 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
-     * {@code expectedResultMessage}, the storage contains the same issue objects as {@code expectedModel}
-     * and the issue list panel displays the persons in the model correctly.
+     * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay}
+     * displays {@code expectedResultMessage}, the storage contains the same issue objects as {@code
+     * expectedModel} and the issue list panel displays the persons in the model correctly.
      */
-    protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
+    protected void assertApplicationDisplaysExpected(String expectedCommandInput,
+            String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
@@ -184,8 +187,8 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to
+     * remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
@@ -196,8 +199,9 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
-     * of the previously selected issue.
+     * Asserts that the previously selected card is now deselected and the browser's url remains displaying
+     * the details of the previously selected issue.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
@@ -206,8 +210,10 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the issue in the issue list panel at
-     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     * Asserts that the browser's url is changed to display the details of the issue in the issue list panel
+     * at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is
+     * selected.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
@@ -227,6 +233,7 @@ public abstract class SaveItSystemTest {
 
     /**
      * Asserts that the browser's url and the selected card in the issue list panel remain unchanged.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
@@ -259,8 +266,8 @@ public abstract class SaveItSystemTest {
     }
 
     /**
-     * Asserts that only the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, while the save location remains the same.
+     * Asserts that only the sync status in the status bar was changed to the timing of {@code
+     * ClockRule#getInjectedClock()}, while the save location remains the same.
      */
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
@@ -277,7 +284,8 @@ public abstract class SaveItSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
+                getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());

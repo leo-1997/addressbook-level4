@@ -20,8 +20,8 @@ public class VersionedSaveIt extends SaveIt {
     }
 
     /**
-     * Saves a copy of the current {@code SaveIt} state at the end of the state list.
-     * Undone states are removed from the state list.
+     * Saves a copy of the current {@code SaveIt} state at the end of the state list. Undone states are
+     * removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
@@ -93,6 +93,7 @@ public class VersionedSaveIt extends SaveIt {
      * Thrown when trying to {@code undo()} but can't.
      */
     public static class NoUndoableStateException extends RuntimeException {
+
         private NoUndoableStateException() {
             super("Current state pointer at start of saveItState list, unable to undo.");
         }
@@ -102,6 +103,7 @@ public class VersionedSaveIt extends SaveIt {
      * Thrown when trying to {@code redo()} but can't.
      */
     public static class NoRedoableStateException extends RuntimeException {
+
         private NoRedoableStateException() {
             super("Current state pointer at end of saveItState list, unable to redo.");
         }

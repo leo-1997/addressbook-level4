@@ -1,12 +1,14 @@
 package guitests.guihandles;
 
 import javafx.scene.Node;
+
 import org.controlsfx.control.StatusBar;
 
 /**
  * A handle for the {@code StatusBarFooter} at the footer of the application.
  */
 public class StatusBarFooterHandle extends NodeHandle<Node> {
+
     public static final String STATUS_BAR_PLACEHOLDER = "#statusbarPlaceholder";
 
     private static final String SYNC_STATUS_ID = "#syncStatus";
@@ -47,8 +49,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the sync status is different from the value remembered by the most recent
-     * {@code rememberSyncStatus()} call.
+     * Returns true if the current content of the sync status is different from the value remembered by the
+     * most recent {@code rememberSyncStatus()} call.
      */
     public boolean isSyncStatusChanged() {
         return !lastRememberedSyncStatus.equals(getSyncStatus());
@@ -62,8 +64,8 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if the current content of the 'save location' is different from the value remembered by the most
-     * recent {@code rememberSaveLocation()} call.
+     * Returns true if the current content of the 'save location' is different from the value remembered by
+     * the most recent {@code rememberSaveLocation()} call.
      */
     public boolean isSaveLocationChanged() {
         return !lastRememberedSaveLocation.equals(getSaveLocation());

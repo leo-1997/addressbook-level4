@@ -65,8 +65,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
     }
 
     /**
-     * Asserts that the save location matches that of {@code expectedSaveLocation}, and the
-     * sync status matches that of {@code expectedSyncStatus}.
+     * Asserts that the save location matches that of {@code expectedSaveLocation}, and the sync status
+     * matches that of {@code expectedSyncStatus}.
      */
     private void assertStatusBarContent(String expectedSaveLocation, String expectedSyncStatus) {
         assertEquals(expectedSaveLocation, statusBarFooterHandle.getSaveLocation());

@@ -15,6 +15,7 @@ import seedu.address.ui.testutil.UiPartRule;
  * A GUI unit test class for SaveIt.
  */
 public abstract class GuiUnitTest {
+
     @Rule
     public final UiPartRule uiPartRule = new UiPartRule();
 

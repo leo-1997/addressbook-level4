@@ -9,13 +9,15 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 public class HistoryCommandTest {
+
     private CommandHistory history = new CommandHistory();
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
     @Test
     public void execute() {
-        assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
+        assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY,
+                expectedModel);
 
         String command1 = "clear";
         history.add(command1);

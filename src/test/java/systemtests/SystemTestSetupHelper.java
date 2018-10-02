@@ -15,6 +15,7 @@ import seedu.address.model.ReadOnlySaveIt;
  * Contains helper methods that system tests require.
  */
 public class SystemTestSetupHelper {
+
     private TestApp testApp;
     private MainWindowHandle mainWindowHandle;
 

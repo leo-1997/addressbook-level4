@@ -24,8 +24,7 @@ public class XmlSerializableSaveIt {
     private List<XmlAdaptedPerson> persons;
 
     /**
-     * Creates an empty XmlSerializableSaveIt.
-     * This empty constructor is required for marshalling.
+     * Creates an empty XmlSerializableSaveIt. This empty constructor is required for marshalling.
      */
     public XmlSerializableSaveIt() {
         persons = new ArrayList<>();
@@ -42,8 +41,8 @@ public class XmlSerializableSaveIt {
     /**
      * Converts this address into the model's {@code SaveIt} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     * XmlAdaptedPerson}.
      */
     public SaveIt toModelType() throws IllegalValueException {
         SaveIt saveIt = new SaveIt();

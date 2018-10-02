@@ -18,6 +18,7 @@ import seedu.address.model.issue.Issue;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedSaveIt versionedSaveIt;
@@ -51,7 +52,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedSaveIt;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateSaveItChanged() {
         raise(new SaveItChangedEvent(versionedSaveIt));
     }
@@ -86,8 +89,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Issue List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of
-     * {@code versionedSaveIt}
+     * Returns an unmodifiable view of the list of {@code Issue} backed by the internal list of {@code
+     * versionedSaveIt}
      */
     @Override
     public ObservableList<Issue> getFilteredPersonList() {

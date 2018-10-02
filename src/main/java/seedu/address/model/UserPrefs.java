@@ -12,7 +12,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path saveItFilePath = Paths.get("data" , "address.xml");
+    private Path saveItFilePath = Paths.get("data", "address.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);

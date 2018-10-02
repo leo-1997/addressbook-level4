@@ -5,13 +5,14 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.AppUtil;
 
 /**
- * Represents a Issue's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidIssueStatement(String)}
+ * Represents a Issue's name in the address book. Guarantees: immutable; is valid as declared in {@link
+ * #isValidIssueStatement(String)}
  */
 public class IssueStatement {
 
     public static final String MESSAGE_ISSUE_STATEMENT_CONSTRAINTS =
-            "Issue statement should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Issue statement should only contain alphanumeric characters and spaces, and it should not be "
+                    + "blank";
 
     /*
      * The first character of the address must not be a whitespace,

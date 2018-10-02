@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.AppUtil;
 
 /**
- * Represents a Issue's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Issue's phone number in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidPhone(String)}
  */
 public class Phone {
 

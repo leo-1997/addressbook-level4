@@ -9,25 +9,25 @@ import seedu.address.model.issue.Issue;
 import seedu.address.model.issue.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameIssue comparison)
+ * Wraps all data at the address-book level Duplicates are not allowed (by .isSameIssue comparison)
  */
 public class SaveIt implements ReadOnlySaveIt {
 
     private final UniquePersonList persons;
 
     /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
+     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid
+     * duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
     }
 
-    public SaveIt() {}
+    public SaveIt() {
+    }
 
     /**
      * Creates an SaveIt using the Persons in the {@code toBeCopied}
@@ -40,8 +40,8 @@ public class SaveIt implements ReadOnlySaveIt {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the issue list with {@code issues}.
-     * {@code issues} must not contain duplicate issues.
+     * Replaces the contents of the issue list with {@code issues}. {@code issues} must not contain duplicate
+     * issues.
      */
     public void setPersons(List<Issue> issues) {
         this.persons.setPersons(issues);
@@ -67,17 +67,16 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Adds a issue to the address book.
-     * The issue must not already exist in the address book.
+     * Adds a issue to the address book. The issue must not already exist in the address book.
      */
     public void addPerson(Issue p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given issue {@code target} in the list with {@code editedIssue}.
-     * {@code target} must exist in the address book.
-     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the address book.
+     * Replaces the given issue {@code target} in the list with {@code editedIssue}. {@code target} must exist
+     * in the address book. The issue identity of {@code editedIssue} must not be the same as another existing
+     * issue in the address book.
      */
     public void updatePerson(Issue target, Issue editedIssue) {
         requireNonNull(editedIssue);
@@ -86,8 +85,7 @@ public class SaveIt implements ReadOnlySaveIt {
     }
 
     /**
-     * Removes {@code key} from this {@code SaveIt}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code SaveIt}. {@code key} must exist in the address book.
      */
     public void removePerson(Issue key) {
         persons.remove(key);

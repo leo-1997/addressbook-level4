@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class CollectionUtilTest {
+
     @Test
     public void requireAllNonNullVarargs() {
         // no arguments
@@ -82,8 +83,8 @@ public class CollectionUtilTest {
     }
 
     /**
-     * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException}
-     * if {@code objects} or any element of {@code objects} is null.
+     * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException} if
+     * {@code objects} or any element of {@code objects} is null.
      */
     private void assertNullPointerExceptionThrown(Object... objects) {
         try {

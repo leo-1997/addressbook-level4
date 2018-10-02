@@ -12,6 +12,7 @@ import seedu.address.commons.util.XmlUtil;
  * Stores address data in an XML file
  */
 public class XmlFileStorage {
+
     /**
      * Saves the given address data to the specified file.
      */
@@ -28,7 +29,7 @@ public class XmlFileStorage {
      * Returns address book in the file or an empty address book
      */
     public static XmlSerializableSaveIt loadDataFromSaveFile(Path file) throws DataConversionException,
-                                                                            FileNotFoundException {
+            FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableSaveIt.class);
         } catch (JAXBException e) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Issue with missing name field -->
 <issue>
-    <phone>9482424</phone>
-    <email>hans@example</email>
-    <address>4th street</address>
-    <tagged>friends</tagged>
+  <phone>9482424</phone>
+  <email>hans@example</email>
+  <address>4th street</address>
+  <tagged>friends</tagged>
 </issue>

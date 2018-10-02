@@ -12,11 +12,11 @@ import seedu.address.model.issue.exceptions.DuplicatePersonException;
 import seedu.address.model.issue.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A issue is considered unique by comparing using {@code Issue#isSameIssue(Issue)}. As such, adding and updating of
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls. A issue is
+ * considered unique by comparing using {@code Issue#isSameIssue(Issue)}. As such, adding and updating of
  * persons uses Issue#isSameIssue(Issue) for equality so as to ensure that the issue being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a issue uses Issue#equals(Object) so
- * as to ensure that the issue with exactly the same fields will be removed.
+ * unique in terms of identity in the UniquePersonList. However, the removal of a issue uses
+ * Issue#equals(Object) so as to ensure that the issue with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -35,8 +35,7 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Adds a issue to the list.
-     * The issue must not already exist in the list.
+     * Adds a issue to the list. The issue must not already exist in the list.
      */
     public void add(Issue toAdd) {
         requireNonNull(toAdd);
@@ -47,9 +46,9 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Replaces the issue {@code target} in the list with {@code editedIssue}.
-     * {@code target} must exist in the list.
-     * The issue identity of {@code editedIssue} must not be the same as another existing issue in the list.
+     * Replaces the issue {@code target} in the list with {@code editedIssue}. {@code target} must exist in
+     * the list. The issue identity of {@code editedIssue} must not be the same as another existing issue in
+     * the list.
      */
     public void setPerson(Issue target, Issue editedIssue) {
         CollectionUtil.requireAllNonNull(target, editedIssue);
@@ -67,8 +66,7 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Removes the equivalent issue from the list.
-     * The issue must exist in the list.
+     * Removes the equivalent issue from the list. The issue must exist in the list.
      */
     public void remove(Issue toRemove) {
         requireNonNull(toRemove);
@@ -83,8 +81,8 @@ public class UniquePersonList implements Iterable<Issue> {
     }
 
     /**
-     * Replaces the contents of this list with {@code issues}.
-     * {@code issues} must not contain duplicate issues.
+     * Replaces the contents of this list with {@code issues}. {@code issues} must not contain duplicate
+     * issues.
      */
     public void setPersons(List<Issue> issues) {
         CollectionUtil.requireAllNonNull(issues);
@@ -111,7 +109,7 @@ public class UniquePersonList implements Iterable<Issue> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override

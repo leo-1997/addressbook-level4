@@ -2,14 +2,15 @@ package guitests;
 
 import guitests.guihandles.exceptions.StageNotFoundException;
 import javafx.stage.Stage;
+
 import org.testfx.api.FxRobot;
 
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
 /**
- * Robot used to simulate user actions on the GUI.
- * Extends {@link FxRobot} by adding some customized functionality and workarounds.
+ * Robot used to simulate user actions on the GUI. Extends {@link FxRobot} by adding some customized
+ * functionality and workarounds.
  */
 public class GuiRobot extends FxRobot {
 
@@ -27,8 +28,8 @@ public class GuiRobot extends FxRobot {
 
     /**
      * Pauses execution for {@code PAUSE_FOR_HUMAN_DELAY_MILLISECONDS} milliseconds for a human to examine the
-     * effects of the test. This method will be disabled when the GUI tests are executed in headless mode to avoid
-     * unnecessary delays.
+     * effects of the test. This method will be disabled when the GUI tests are executed in headless mode to
+     * avoid unnecessary delays.
      */
     public void pauseForHuman() {
         if (isHeadlessMode) {
@@ -46,9 +47,11 @@ public class GuiRobot extends FxRobot {
     }
 
     /**
-     * Waits for {@code event} to be true by {@code DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS} milliseconds.
+     * Waits for {@code event} to be true by {@code DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS}
+     * milliseconds.
      *
-     * @throws EventTimeoutException if the time taken exceeds {@code DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS}
+     * @throws EventTimeoutException if the time taken exceeds {@code
+     * DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS}
      * milliseconds.
      */
     public void waitForEvent(BooleanSupplier event) {
@@ -94,9 +97,9 @@ public class GuiRobot extends FxRobot {
     }
 
     /**
-     * Returns the first stage, ordered by proximity to the current target window, with the stage title.
-     * The order that the windows are searched are as follows (proximity): current target window,
-     * children of the target window, rest of the windows.
+     * Returns the first stage, ordered by proximity to the current target window, with the stage title. The
+     * order that the windows are searched are as follows (proximity): current target window, children of the
+     * target window, rest of the windows.
      *
      * @throws StageNotFoundException if the stage is not found.
      */
@@ -114,5 +117,6 @@ public class GuiRobot extends FxRobot {
      * Represents an error which occurs when a timeout occurs when waiting for an event.
      */
     private class EventTimeoutException extends RuntimeException {
+
     }
 }

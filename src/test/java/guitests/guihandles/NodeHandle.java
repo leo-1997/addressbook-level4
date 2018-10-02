@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
  * Provides access to a node in a JavaFx application for GUI testing purposes.
  */
 public abstract class NodeHandle<T extends Node> {
+
     protected final GuiRobot guiRobot = new GuiRobot();
 
     private final T rootNode;

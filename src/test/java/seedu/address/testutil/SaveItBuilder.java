@@ -4,9 +4,8 @@ import seedu.address.model.SaveIt;
 import seedu.address.model.issue.Issue;
 
 /**
- * A utility class to help with building address objects.
- * Example usage: <br>
- *     {@code SaveIt ab = new SaveItBuilder().withPerson("John", "Doe").build();}
+ * A utility class to help with building address objects. Example usage: <br> {@code SaveIt ab = new
+ * SaveItBuilder().withPerson("John", "Doe").build();}
  */
 public class SaveItBuilder {
 

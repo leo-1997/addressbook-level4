@@ -31,8 +31,7 @@ public interface Storage extends SaveItStorage, UserPrefsStorage {
     void saveSaveIt(ReadOnlySaveIt saveIt) throws IOException;
 
     /**
-     * Saves the current version of the SaveIt to the hard disk.
-     *   Creates the data file if it is missing.
+     * Saves the current version of the SaveIt to the hard disk. Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleSaveItChangedEvent(SaveItChangedEvent abce);

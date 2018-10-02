@@ -9,6 +9,7 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code Issue}'s {@code IssueStatement} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Issue> {
+
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {

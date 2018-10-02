@@ -12,6 +12,7 @@ import java.util.Set;
  * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
  */
 public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
+
     public static final String PERSON_LIST_VIEW_ID = "#personListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
@@ -23,8 +24,9 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
-     * A maximum of 1 item can be selected at any time.
+     * Returns a handle to the selected {@code PersonCardHandle}. A maximum of 1 item can be selected at any
+     * time.
+     *
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
@@ -99,6 +101,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
 
     /**
      * Returns the issue card handle of a issue associated with the {@code index} in the list.
+     *
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public PersonCardHandle getPersonCardHandle(int index) {
@@ -114,9 +117,9 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Returns all card nodes in the scene graph.
-     * Card nodes that are visible in the listview are definitely in the scene graph, while some nodes that are not
-     * visible in the listview may also be in the scene graph.
+     * Returns all card nodes in the scene graph. Card nodes that are visible in the listview are definitely
+     * in the scene graph, while some nodes that are not visible in the listview may also be in the scene
+     * graph.
      */
     private Set<Node> getAllCardNodes() {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
@@ -136,8 +139,8 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Issue>> {
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most
+     * recent {@code rememberSelectedPersonCard()} call.
      */
     public boolean isSelectedPersonCardChanged() {
         List<Issue> selectedItems = getRootNode().getSelectionModel().getSelectedItems();

@@ -27,11 +27,14 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
     @Test
     public void delete() {
-        /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
+        /* ----------------- Performing delete operation while an unfiltered list is being shown
+        -------------------- */
 
-        /* Case: delete the first issue in the list, command with leading spaces and trailing spaces -> deleted */
+        /* Case: delete the first issue in the list, command with leading spaces and trailing spaces ->
+        deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
+        String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
+                + "       ";
         Issue deletedIssue = removePerson(expectedModel, INDEX_FIRST_PERSON);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
@@ -56,7 +59,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         Index middlePersonIndex = getMidIndex(getModel());
         assertCommandSuccess(middlePersonIndex);
 
-        /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
+        /* ------------------ Performing delete operation while a filtered list is being shown
+        ---------------------- */
 
         /* Case: filtered issue list, delete index within bounds of address book and issue list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -64,7 +68,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue list
+        /* Case: filtered issue list, delete index within bounds of address book but out of bounds of issue
+         list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -72,7 +77,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
-        /* --------------------- Performing delete operation while a issue card is selected ------------------------ */
+        /* --------------------- Performing delete operation while a issue card is selected
+        ------------------------ */
 
         /* Case: delete the selected issue -> issue list panel selects the issue before the deleted issue */
         showAllPersons();
@@ -85,7 +91,8 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
-        /* --------------------------------- Performing invalid delete operation ------------------------------------ */
+        /* --------------------------------- Performing invalid delete operation
+        ------------------------------------ */
 
         /* Case: invalid index (0) -> rejected */
         command = DeleteCommand.COMMAND_WORD + " 0";
@@ -113,6 +120,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
 
     /**
      * Removes the {@code Issue} at the specified {@code index} in {@code model}'s address book.
+     *
      * @return the removed issue
      */
     private Issue removePerson(Model model, Index index) {
@@ -122,8 +130,9 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Deletes the issue at {@code toDelete} by creating a default {@code DeleteCommand} using {@code toDelete} and
-     * performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     * Deletes the issue at {@code toDelete} by creating a default {@code DeleteCommand} using {@code
+     * toDelete} and performs the same verification as {@code assertCommandSuccess(String, Model, String)}.
+     *
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      */
     private void assertCommandSuccess(Index toDelete) {
@@ -132,18 +141,18 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedIssue);
 
         assertCommandSuccess(
-                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);
+                DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel,
+                expectedResultMessage);
     }
 
     /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays an empty string.<br>
-     * 2. Asserts that the result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the browser url and selected card remains unchanged.<br>
-     * 4. Asserts that the status bar's sync status changes.<br>
-     * 5. Asserts that the command box has the default style class.<br>
-     * Verifications 1 and 2 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * Executes {@code command} and in addition,<br> 1. Asserts that the command box displays an empty
+     * string.<br> 2. Asserts that the result display box displays {@code expectedResultMessage}.<br> 3.
+     * Asserts that the browser url and selected card remains unchanged.<br> 4. Asserts that the status bar's
+     * sync status changes.<br> 5. Asserts that the command box has the default style class.<br> Verifications
+     * 1 and 2 are performed by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String,
+     * Model)}.
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -151,8 +160,10 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
-     * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the
+     * browser url and selected card are expected to update accordingly depending on the card at {@code
+     * expectedSelectedCardIndex}.
+     *
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      * @see SaveItSystemTest#assertSelectedCardChanged(Index)
      */
@@ -172,13 +183,12 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes {@code command} and in addition,<br>
-     * 1. Asserts that the command box displays {@code command}.<br>
-     * 2. Asserts that result display box displays {@code expectedResultMessage}.<br>
-     * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
-     * 4. Asserts that the command box has the error style.<br>
-     * Verifications 1 and 2 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes {@code command} and in addition,<br> 1. Asserts that the command box displays {@code
+     * command}.<br> 2. Asserts that result display box displays {@code expectedResultMessage}.<br> 3. Asserts
+     * that the browser url, selected card and status bar remain unchanged.<br> 4. Asserts that the command
+     * box has the error style.<br> Verifications 1 and 2 are performed by {@code
+     * SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

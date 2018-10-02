@@ -14,6 +14,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class ExitCommandTest {
+
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 

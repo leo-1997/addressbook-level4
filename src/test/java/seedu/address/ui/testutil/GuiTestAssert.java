@@ -14,6 +14,7 @@ import seedu.address.model.issue.Issue;
  * A set of assertion methods useful for writing GUI tests.
  */
 public class GuiTestAssert {
+
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
@@ -39,8 +40,8 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code issues} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code issues} correctly
+     * and in the correct order.
      */
     public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Issue... issues) {
         for (int i = 0; i < issues.length; i++) {
@@ -50,8 +51,8 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code issues} correctly and
-     * in the correct order.
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code issues} correctly
+     * and in the correct order.
      */
     public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Issue> issues) {
         assertListMatching(personListPanelHandle, issues.toArray(new Issue[0]));

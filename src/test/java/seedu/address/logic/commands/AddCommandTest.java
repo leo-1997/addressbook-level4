@@ -88,6 +88,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
         @Override
         public void addPerson(Issue issue) {
             throw new AssertionError("This method should not be called.");
@@ -158,6 +159,7 @@ public class AddCommandTest {
      * A Model stub that contains a single issue.
      */
     private class ModelStubWithPerson extends ModelStub {
+
         private final Issue issue;
 
         ModelStubWithPerson(Issue issue) {
@@ -176,6 +178,7 @@ public class AddCommandTest {
      * A Model stub that always accept the issue being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
+
         final ArrayList<Issue> personsAdded = new ArrayList<>();
 
         @Override

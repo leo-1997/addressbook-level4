@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import com.google.common.collect.ImmutableMultiset;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
  * Provides a handle to a issue card in the issue list panel.
  */
 public class PersonCardHandle extends NodeHandle<Node> {
+
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
@@ -79,7 +81,8 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 && getAddress().equals(issue.getAddress().value)
                 && getPhone().equals(issue.getPhone().value)
                 && getEmail().equals(issue.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(issue.getTags().stream()
+                && ImmutableMultiset.copyOf(getTags())
+                .equals(ImmutableMultiset.copyOf(issue.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }

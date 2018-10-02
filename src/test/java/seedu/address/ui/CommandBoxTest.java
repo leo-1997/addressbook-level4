@@ -126,9 +126,8 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     /**
-     * Runs a command that fails, then verifies that <br>
-     *      - the text remains <br>
-     *      - the command box's style is the same as {@code errorStyleOfCommandBox}.
+     * Runs a command that fails, then verifies that <br> - the text remains <br> - the command box's style is
+     * the same as {@code errorStyleOfCommandBox}.
      */
     private void assertBehaviorForFailedCommand() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
@@ -137,9 +136,8 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     /**
-     * Runs a command that succeeds, then verifies that <br>
-     *      - the text is cleared <br>
-     *      - the command box's style is the same as {@code defaultStyleOfCommandBox}.
+     * Runs a command that succeeds, then verifies that <br> - the text is cleared <br> - the command box's
+     * style is the same as {@code defaultStyleOfCommandBox}.
      */
     private void assertBehaviorForSuccessfulCommand() {
         commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);
@@ -148,7 +146,8 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     /**
-     * Pushes {@code keycode} and checks that the input in the {@code commandBox} equals to {@code expectedCommand}.
+     * Pushes {@code keycode} and checks that the input in the {@code commandBox} equals to {@code
+     * expectedCommand}.
      */
     private void assertInputHistory(KeyCode keycode, String expectedCommand) {
         guiRobot.push(keycode);

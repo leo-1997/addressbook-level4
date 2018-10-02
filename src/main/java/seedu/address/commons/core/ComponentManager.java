@@ -8,6 +8,7 @@ import seedu.address.commons.events.BaseEvent;
  * Registers the class' event handlers in eventsCenter
  */
 public abstract class ComponentManager {
+
     protected EventsCenter eventsCenter;
 
     /**

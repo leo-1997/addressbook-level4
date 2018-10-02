@@ -19,8 +19,9 @@ public interface SaveItStorage {
     Path getSaveItFilePath();
 
     /**
-     * Returns SaveIt data as a {@link ReadOnlySaveIt}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns SaveIt data as a {@link ReadOnlySaveIt}. Returns {@code Optional.empty()} if storage file is
+     * not found.
+     *
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
@@ -33,6 +34,7 @@ public interface SaveItStorage {
 
     /**
      * Saves the given {@link ReadOnlySaveIt} to the storage.
+     *
      * @param saveIt cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

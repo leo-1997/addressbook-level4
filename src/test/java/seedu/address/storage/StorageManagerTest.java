@@ -47,7 +47,8 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonUserPrefsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest}
+         * class.
          */
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(300, 600, 4, 6);
@@ -76,9 +77,10 @@ public class StorageManagerTest {
 
     @Test
     public void handleSaveItChangedEvent_exceptionThrown_eventRaised() {
-        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is
+        // called
         Storage storage = new StorageManager(new XmlSaveItStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+                new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleSaveItChangedEvent(new SaveItChangedEvent(new SaveIt()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }

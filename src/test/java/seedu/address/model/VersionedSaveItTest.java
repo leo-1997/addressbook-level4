@@ -236,14 +236,15 @@ public class VersionedSaveItTest {
     }
 
     /**
-     * Asserts that {@code versionedSaveIt} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedSaveIt#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedSaveIt#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedSaveIt} is currently pointing at {@code expectedCurrentState}, states
+     * before {@code versionedSaveIt#currentStatePointer} is equal to {@code expectedStatesBeforePointer}, and
+     * states after {@code versionedSaveIt#currentStatePointer} is equal to {@code
+     * expectedStatesAfterPointer}.
      */
     private void assertSaveItListStatus(VersionedSaveIt versionedSaveIt,
-                                             List<ReadOnlySaveIt> expectedStatesBeforePointer,
-                                             ReadOnlySaveIt expectedCurrentState,
-                                             List<ReadOnlySaveIt> expectedStatesAfterPointer) {
+            List<ReadOnlySaveIt> expectedStatesBeforePointer,
+            ReadOnlySaveIt expectedCurrentState,
+            List<ReadOnlySaveIt> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
         assertEquals(new SaveIt(versionedSaveIt), expectedCurrentState);
 

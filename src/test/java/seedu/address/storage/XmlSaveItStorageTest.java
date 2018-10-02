@@ -21,6 +21,7 @@ import seedu.address.model.ReadOnlySaveIt;
 import seedu.address.model.SaveIt;
 
 public class XmlSaveItStorageTest {
+
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSaveItStorageTest");
 
     @Rule

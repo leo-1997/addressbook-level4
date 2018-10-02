@@ -9,8 +9,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Issue in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Issue in the address book. Guarantees: details are present and not null, field values are
+ * validated, immutable.
  */
 public class Issue {
 
@@ -52,8 +52,8 @@ public class Issue {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} if modification is
+     * attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
@@ -74,8 +74,8 @@ public class Issue {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. This defines a stronger notion of
+     * equality between two persons.
      */
     @Override
     public boolean equals(Object other) {

@@ -21,6 +21,7 @@ import seedu.address.ui.testutil.EventsCollectorRule;
  * Contains tests for closing of the {@code MainWindow}.
  */
 public class MainWindowCloseTest extends GuiUnitTest {
+
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
@@ -32,7 +33,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
     public void setUp() throws Exception {
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
-            mainWindow = new MainWindow(stage, new Config(), new UserPrefs(), new LogicManager(new ModelManager()));
+            mainWindow = new MainWindow(stage, new Config(), new UserPrefs(),
+                    new LogicManager(new ModelManager()));
             mainWindowHandle = new EmptyMainWindowHandle(stage);
 
             stage.setScene(mainWindow.getRoot().getScene());
@@ -73,11 +75,12 @@ public class MainWindowCloseTest extends GuiUnitTest {
         }
 
         /**
-         * Closes the {@code MainWindow} through an external request {@code MainWindow} (e.g pressing the 'X' button on
-         * the {@code MainWindow} or closing the app through the taskbar).
+         * Closes the {@code MainWindow} through an external request {@code MainWindow} (e.g pressing the 'X'
+         * button on the {@code MainWindow} or closing the app through the taskbar).
          */
         private void closeMainWindowExternally() {
-            guiRobot.interact(() -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+            guiRobot.interact(
+                    () -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
         }
     }
 }

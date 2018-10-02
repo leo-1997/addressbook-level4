@@ -14,10 +14,10 @@ public class XmlAdaptedTag {
     private String tagName;
 
     /**
-     * Constructs an XmlAdaptedTag.
-     * This is the no-arg constructor that is required by JAXB.
+     * Constructs an XmlAdaptedTag. This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTag() {}
+    public XmlAdaptedTag() {
+    }
 
     /**
      * Constructs a {@code XmlAdaptedTag} with the given {@code tagName}.

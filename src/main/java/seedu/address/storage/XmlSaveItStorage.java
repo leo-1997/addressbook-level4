@@ -39,11 +39,12 @@ public class XmlSaveItStorage implements SaveItStorage {
 
     /**
      * Similar to {@link #readSaveIt()}
+     *
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlySaveIt> readSaveIt(Path filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+            FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -67,6 +68,7 @@ public class XmlSaveItStorage implements SaveItStorage {
 
     /**
      * Similar to {@link #saveSaveIt(ReadOnlySaveIt)}
+     *
      * @param filePath location of the data. Cannot be null
      */
     public void saveSaveIt(ReadOnlySaveIt saveIt, Path filePath) throws IOException {

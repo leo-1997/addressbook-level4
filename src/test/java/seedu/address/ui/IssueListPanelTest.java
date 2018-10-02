@@ -25,10 +25,12 @@ import seedu.address.model.issue.Issue;
 import seedu.address.storage.XmlSerializableSaveIt;
 
 public class IssueListPanelTest extends GuiUnitTest {
+
     private static final ObservableList<Issue> TYPICAL_ISSUES =
             FXCollections.observableList(getTypicalPersons());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(
+            INDEX_SECOND_PERSON);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -56,14 +58,15 @@ public class IssueListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        PersonCardHandle expectedPerson = personListPanelHandle
+                .getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
         PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
-     * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
+     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser
+     * than {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
     public void performanceTest() throws Exception {
@@ -76,8 +79,8 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * Returns a list of persons containing {@code personCount} persons that is used to populate the {@code
+     * PersonListPanel}.
      */
     private ObservableList<Issue> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
@@ -87,7 +90,8 @@ public class IssueListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM terminates.
+     * Returns a .xml file containing {@code personCount} persons. This file will be deleted when the JVM
+     * terminates.
      */
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();

@@ -17,6 +17,7 @@ import seedu.address.model.issue.NameContainsKeywordsPredicate;
 import seedu.address.testutil.SaveItBuilder;
 
 public class ModelManagerTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

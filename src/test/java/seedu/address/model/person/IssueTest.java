@@ -18,6 +18,7 @@ import seedu.address.model.issue.Issue;
 import seedu.address.testutil.PersonBuilder;
 
 public class IssueTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -37,7 +38,8 @@ public class IssueTest {
         assertFalse(ALICE.isSameIssue(null));
 
         // different phone and email -> returns false
-        Issue editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        Issue editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .build();
         assertFalse(ALICE.isSameIssue(editedAlice));
 
         // different name -> returns false
@@ -55,7 +57,8 @@ public class IssueTest {
         assertTrue(ALICE.isSameIssue(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
         assertTrue(ALICE.isSameIssue(editedAlice));
     }
 

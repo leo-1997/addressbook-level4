@@ -52,9 +52,11 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     public void add() {
         Model model = getModel();
 
-        /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
+        /* ------------------------ Perform add operations on the shown unfiltered list
+        ----------------------------- */
 
-        /* Case: add a issue without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a issue without tags to a non-empty address book, command with leading spaces and
+        trailing spaces
          * -> added
          */
         Issue toAdd = AMY;
@@ -92,26 +94,31 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: add a issue with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+        command =
+                AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
+                        + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a issue, missing tags -> added */
         assertCommandSuccess(HOON);
 
-        /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
+        /* -------------------------- Perform add operation on the shown filtered list
+        ------------------------------ */
 
         /* Case: filters the issue list before adding -> added */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a issue card is selected --------------------------- */
+        /* ------------------------ Perform add operation while a issue card is selected
+        --------------------------- */
 
-        /* Case: selects first card in the issue list, add a issue -> added, card selection remains unchanged */
+        /* Case: selects first card in the issue list, add a issue -> added, card selection remains
+        unchanged */
         selectPerson(Index.fromOneBased(1));
         assertCommandSuccess(CARL);
 
-        /* ----------------------------------- Perform invalid add operations --------------------------------------- */
+        /* ----------------------------------- Perform invalid add operations
+        --------------------------------------- */
 
         /* Case: add a duplicate issue -> rejected */
         command = PersonUtil.getAddCommand(HOON);
@@ -138,38 +145,46 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing address -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
-        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertCommandFailure(command,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
         command = "adds " + PersonUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY;
         assertCommandFailure(command, IssueStatement.MESSAGE_ISSUE_STATEMENT_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
+                + ADDRESS_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + INVALID_ADDRESS_DESC;
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
@@ -179,17 +194,14 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br>
-     * 1. Command box displays an empty string.<br>
-     * 2. Command box has the default style class.<br>
-     * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
-     * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
-     * the current model added with {@code toAdd}.<br>
-     * 5. Browser url and selected card remain unchanged.<br>
-     * 6. Status bar's sync status changes.<br>
-     * Verifications 1, 3 and 4 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes the {@code AddCommand} that adds {@code toAdd} to the model and asserts that the,<br> 1.
+     * Command box displays an empty string.<br> 2. Command box has the default style class.<br> 3. Result
+     * display box displays the success message of executing {@code AddCommand} with the details of {@code
+     * toAdd}.<br> 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in the
+     * current model added with {@code toAdd}.<br> 5. Browser url and selected card remain unchanged.<br> 6.
+     * Status bar's sync status changes.<br> Verifications 1, 3 and 4 are performed by {@code
+     * SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Issue toAdd) {
@@ -199,6 +211,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(Issue)}. Executes {@code command}
      * instead.
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(Issue)
      */
     private void assertCommandSuccess(String command, Issue toAdd) {
@@ -211,10 +224,9 @@ public class AddCommandSystemTest extends SaveItSystemTest {
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Issue)} except asserts that
-     * the,<br>
-     * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
-     * {@code expectedModel}.<br>
+     * the,<br> 1. Result display box displays {@code expectedResultMessage}.<br> 2. {@code Storage} and
+     * {@code PersonListPanel} equal to the corresponding components in {@code expectedModel}.<br>
+     *
      * @see AddCommandSystemTest#assertCommandSuccess(String, Issue)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
@@ -226,14 +238,12 @@ public class AddCommandSystemTest extends SaveItSystemTest {
     }
 
     /**
-     * Executes {@code command} and asserts that the,<br>
-     * 1. Command box displays {@code command}.<br>
-     * 2. Command box has the error style class.<br>
-     * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
-     * 5. Browser url, selected card and status bar remain unchanged.<br>
-     * Verifications 1, 3 and 4 are performed by
-     * {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * Executes {@code command} and asserts that the,<br> 1. Command box displays {@code command}.<br> 2.
+     * Command box has the error style class.<br> 3. Result display box displays {@code
+     * expectedResultMessage}.<br> 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br> 5.
+     * Browser url, selected card and status bar remain unchanged.<br> Verifications 1, 3 and 4 are performed
+     * by {@code SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     *
      * @see SaveItSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {

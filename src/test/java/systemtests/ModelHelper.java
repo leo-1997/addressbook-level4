@@ -12,6 +12,7 @@ import java.util.function.Predicate;
  * Contains helper methods to set up {@code Model} for testing.
  */
 public class ModelHelper {
+
     private static final Predicate<Issue> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
 
     /**

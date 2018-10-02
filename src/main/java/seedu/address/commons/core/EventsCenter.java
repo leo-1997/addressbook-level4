@@ -10,6 +10,7 @@ import seedu.address.commons.events.BaseEvent;
  * Manages the event dispatching of the app.
  */
 public class EventsCenter {
+
     private static final Logger logger = LogsCenter.getLogger(EventsCenter.class);
     private static EventsCenter instance;
     private final EventBus eventBus;
