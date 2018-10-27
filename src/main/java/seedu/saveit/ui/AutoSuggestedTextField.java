@@ -108,6 +108,7 @@ public class AutoSuggestedTextField extends TextField {
                 }
                 popUpWindow.getItems().clear();
                 popUpWindow.getItems().addAll(menuItems);
+                popUpWindow.hide();
                 popUpWindow.show(textField, Side.BOTTOM, (double) textField.getCaretPosition() * 8, 0);
             }
         } else {
