@@ -40,7 +40,6 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-//        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
 
         Directory currentDirectory = model.getCurrentDirectory();
         if (currentDirectory.isRootLevel()) {
@@ -48,11 +47,6 @@ public class DeleteCommand extends Command {
         } else {
             return handleDeleteSolution(model);
         }
-//
-//        Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
-//        model.deleteIssue(issueToDelete);
-//        model.commitSaveIt();
-//        return new CommandResult(String.format(MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete));
     }
 
     private CommandResult handleDeleteIssue(Model model) throws CommandException{
@@ -60,7 +54,6 @@ public class DeleteCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-
         Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteIssue(issueToDelete);
         model.commitSaveIt();
