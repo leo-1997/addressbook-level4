@@ -215,6 +215,9 @@ public class SaveIt implements ReadOnlySaveIt {
         issues.remove(key);
     }
 
+    /**
+     * Removes {@code solutionToDelete} from this {@code SaveIt} in the target issue.
+     */
     public void removeSolution(Index issueIndex, Solution solutionToDelete) {
         Issue issueToEdit = issues.getIssue(issueIndex);
         List<Solution> solutionsToUpdate = new ArrayList<>(issueToEdit.getSolutions());

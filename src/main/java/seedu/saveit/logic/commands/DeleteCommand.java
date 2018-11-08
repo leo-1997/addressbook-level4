@@ -9,7 +9,6 @@ import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
-import seedu.saveit.logic.parser.ParserUtil;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.issue.Solution;
@@ -49,7 +48,10 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private CommandResult handleDeleteIssue(Model model) throws CommandException{
+    /**
+     * Handles delete issue command.
+     */
+    private CommandResult handleDeleteIssue(Model model) throws CommandException {
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
@@ -60,13 +62,16 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete));
     }
 
-    private CommandResult handleDeleteSolution(Model model) throws CommandException{
+    /**
+     * Handles delete solution command.
+     */
+    private CommandResult handleDeleteSolution(Model model) throws CommandException {
         int issueIndex = model.getCurrentDirectory().getIssue() - 1;
         List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= lastShownList.get(issueIndex).getSolutions().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
-        Solution solutionToDelete =  lastShownList.get(issueIndex).getSolutions().get(targetIndex.getZeroBased());
+        Solution solutionToDelete = lastShownList.get(issueIndex).getSolutions().get(targetIndex.getZeroBased());
         model.deleteSolution(Index.fromZeroBased(issueIndex), solutionToDelete);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_DELETE_SOLUTION_SUCCESS, solutionToDelete));
