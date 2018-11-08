@@ -310,6 +310,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteSolution(Index issueIndex, Solution solutionToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addSolution(Index index, Solution solution) {
             throw new AssertionError("This method should not be called.");
         }

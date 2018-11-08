@@ -9,8 +9,10 @@ import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
+import seedu.saveit.logic.parser.ParserUtil;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
+import seedu.saveit.model.issue.Solution;
 
 /**
  * Deletes an issue identified using it's displayed index from the saveIt.
@@ -27,6 +29,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_ISSUE_SUCCESS = "Deleted Issue: %1$s";
+    public static final String MESSAGE_DELETE_SOLUTION_SUCCESS = "Deleted Solution: %1$s";
 
     private final Index targetIndex;
 
@@ -37,13 +40,23 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
+//        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
 
         Directory currentDirectory = model.getCurrentDirectory();
-        if (!currentDirectory.isRootLevel()) {
-            throw new CommandException(Messages.MESSAGE_WRONG_DIRECTORY);
+        if (currentDirectory.isRootLevel()) {
+            return handleDeleteIssue(model);
+        } else {
+            return handleDeleteSolution(model);
         }
+//
+//        Issue issueToDelete = lastShownList.get(targetIndex.getZeroBased());
+//        model.deleteIssue(issueToDelete);
+//        model.commitSaveIt();
+//        return new CommandResult(String.format(MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete));
+    }
 
+    private CommandResult handleDeleteIssue(Model model) throws CommandException{
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
         }
@@ -52,6 +65,18 @@ public class DeleteCommand extends Command {
         model.deleteIssue(issueToDelete);
         model.commitSaveIt();
         return new CommandResult(String.format(MESSAGE_DELETE_ISSUE_SUCCESS, issueToDelete));
+    }
+
+    private CommandResult handleDeleteSolution(Model model) throws CommandException{
+        int issueIndex = model.getCurrentDirectory().getIssue() - 1;
+        List<Issue> lastShownList = model.getFilteredAndSortedIssueList();
+        if (targetIndex.getZeroBased() >= lastShownList.get(issueIndex).getSolutions().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
+        }
+        Solution solutionToDelete =  lastShownList.get(issueIndex).getSolutions().get(targetIndex.getZeroBased());
+        model.deleteSolution(Index.fromZeroBased(issueIndex), solutionToDelete);
+        model.commitSaveIt();
+        return new CommandResult(String.format(MESSAGE_DELETE_SOLUTION_SUCCESS, solutionToDelete));
     }
 
     @Override

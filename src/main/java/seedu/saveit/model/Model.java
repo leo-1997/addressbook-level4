@@ -47,6 +47,8 @@ public interface Model {
      */
     void deleteIssue(Issue target);
 
+    void deleteSolution(Index issueIndex, Solution solutionToDelete);
+
     /**
      * Adds the given solution to the indexed issue.
      * {@code solution} must not already exist in the given issue.

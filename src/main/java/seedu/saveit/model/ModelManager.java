@@ -96,6 +96,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteSolution(Index issueIndex, Solution solutionToDelete) {
+        versionedSaveIt.removeSolution(issueIndex, solutionToDelete);
+        indicateSaveItChanged();
+    }
+
+    @Override
     public void addSolution(Index index, Solution solution) {
         versionedSaveIt.addSolution(index, solution);
         indicateSaveItChanged();
