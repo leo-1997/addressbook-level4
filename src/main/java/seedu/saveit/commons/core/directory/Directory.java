@@ -21,9 +21,8 @@ public class Directory {
     /**
      * newIssue and newSolution should be non-negative values.
      */
-    public static Directory formDirectory(int newIssue, int newSolution) {
-        assert newIssue >= 0 && newSolution >= 0;
-        return new Directory(newIssue, newSolution);
+    public static Directory formRootDirectory() {
+        return new Directory(0, 0);
     }
 
     /**

@@ -2,6 +2,9 @@ package seedu.saveit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.saveit.commons.core.EventsCenter;
+import seedu.saveit.commons.core.directory.Directory;
+import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.logic.CommandHistory;
 import seedu.saveit.logic.commands.exceptions.CommandException;
 import seedu.saveit.model.Model;
@@ -27,6 +30,8 @@ public class UndoCommand extends Command {
 
         model.undoSaveIt();
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
+        model.resetDirectory(new Directory(0, 0));
+        EventsCenter.getInstance().post(new DirectoryChangedEvent(Directory.formRootDirectory()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

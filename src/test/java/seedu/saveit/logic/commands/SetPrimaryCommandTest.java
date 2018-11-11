@@ -67,7 +67,7 @@ public class SetPrimaryCommandTest {
         model.resetDirectory(newDirectory);
         expectedModel.resetDirectory(newDirectory);
         issueSelected = expectedModel.getFilteredAndSortedIssueList().get(selectedIssueOneBasedIndex.getZeroBased());
-        solutionList = expectedModel.getFilteredSolutionList();
+        solutionList = expectedModel.getFilteredAndSortedSolutionList();
     }
 
     /**

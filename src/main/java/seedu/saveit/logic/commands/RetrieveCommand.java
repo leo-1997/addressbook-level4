@@ -46,7 +46,7 @@ public class RetrieveCommand extends Command {
 
         if (model.getCurrentDirectory().isIssueLevel()) {
             try {
-                String selectedLink = model.getFilteredSolutionList().get(targetedIndex.getZeroBased())
+                String selectedLink = model.getFilteredAndSortedSolutionList().get(targetedIndex.getZeroBased())
                         .getLink().getValue();
                 copyToClipBoard(selectedLink);
                 return new CommandResult(

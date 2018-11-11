@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.saveit.testutil.TypicalIssues.AMY;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.saveit.testutil.SaveItBuilder;
 
 public class VersionedSaveItTest {
 
-    private final ReadOnlySaveIt saveItWithAmy = new SaveItBuilder().withIssue(AMY).build();
-    private final ReadOnlySaveIt saveItWithBob = new SaveItBuilder().withIssue(BOB).build();
-    private final ReadOnlySaveIt saveItWithCarl = new SaveItBuilder().withIssue(CARL).build();
+    private final ReadOnlySaveIt saveItWithAmy = new SaveItBuilder().withIssue(VALID_JAVA_ISSUE).build();
+    private final ReadOnlySaveIt saveItWithBob = new SaveItBuilder().withIssue(VALID_C_ISSUE).build();
+    private final ReadOnlySaveIt saveItWithCarl = new SaveItBuilder().withIssue(RUBY_HASH_BUG).build();
     private final ReadOnlySaveIt emptySaveIt = new SaveItBuilder().build();
 
     @Test

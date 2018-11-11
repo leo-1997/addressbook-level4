@@ -11,8 +11,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
+
 import seedu.saveit.commons.core.LogsCenter;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
+import seedu.saveit.commons.events.model.SortTypeChangedEvent;
 import seedu.saveit.commons.events.ui.NewResultAvailableEvent;
 
 /**
@@ -23,9 +25,12 @@ public class ResultDisplay extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(ResultDisplay.class);
     private static final String FXML = "ResultDisplay.fxml";
     private static final String ROOT_DIRECTORY = "../SaveIt";
+    private static final String SORTED_BY = "Sorted By: ";
+    private static final String DEFAULT_SORT_TYPE = "Default";
 
     private final StringProperty displayed = new SimpleStringProperty("");
     private final StringProperty currentDirectory = new SimpleStringProperty(ROOT_DIRECTORY);
+    private final StringProperty currentSortType = new SimpleStringProperty(SORTED_BY + DEFAULT_SORT_TYPE);
 
     @FXML
     private TextArea resultDisplay;
@@ -33,10 +38,14 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private Label directory;
 
+    @FXML
+    private Label sortType;
+
     public ResultDisplay() {
         super(FXML);
         resultDisplay.textProperty().bind(displayed);
         directory.textProperty().bind(currentDirectory);
+        sortType.textProperty().bind(currentSortType);
         registerAsAnEventHandler(this);
     }
 
@@ -48,9 +57,15 @@ public class ResultDisplay extends UiPart<Region> {
 
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+    private void handleDirectoryChangedEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Platform.runLater(() -> currentDirectory.setValue(event.directory.toString()));
     }
 
+    @Subscribe
+    private void handleChangeSortTypeRequestEvent(SortTypeChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        String sortType = event.sortType == null ? "Default" : event.sortType.toString();
+        Platform.runLater(() -> currentSortType.setValue(SORTED_BY + sortType));
+    }
 }

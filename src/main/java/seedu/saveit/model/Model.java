@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 import seedu.saveit.commons.core.index.Index;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.Solution;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.model.issue.Tag;
 
 /**
@@ -27,6 +27,9 @@ public interface Model {
 
     /** Return the current directory. */
     Directory getCurrentDirectory();
+
+    /** Return the current sortType. */
+    Comparator<Issue> getCurrentSortType();
 
     /** Returns the SaveIt */
     ReadOnlySaveIt getSaveIt();
@@ -51,7 +54,7 @@ public interface Model {
      * Adds the given solution to the indexed issue.
      * {@code solution} must not already exist in the given issue.
      */
-    void addSolution(Index index, Solution solution);
+    void addSolution(Issue targetIssue, Solution solution);
 
     /**
      * Adds the given issue.
@@ -66,11 +69,8 @@ public interface Model {
      */
     void updateIssue(Issue target, Issue editedIssue);
 
-    /** Returns an unmodifiable view of the filtered issue list */
-    ObservableList<Issue> getFilteredIssueList();
-
     /**Returns an unmodified view of the filtered solution list of the selected issue */
-    ObservableList<Solution> getFilteredSolutionList();
+    ObservableList<Solution> getFilteredAndSortedSolutionList();
 
     /**
      * Filters the issues given the predicate and sorts them based on the search frequency
@@ -81,7 +81,7 @@ public interface Model {
      * Sorts the issues given the order.
      * @param sortType
      */
-    void sortIssues(IssueSort sortType);
+    void sortIssues(SortType sortType);
 
     /** Returns an unmodifiable view of the filtered or sorted issue list */
     ObservableList<Issue> getFilteredAndSortedIssueList();
@@ -100,7 +100,7 @@ public interface Model {
     /**
      * Adds tag(s) to the existing data of this {@code SaveIt} with {@code tagList} for a range of {@code issues}.
      */
-    void addTag(Set<Issue> issues, Set<Tag> tagList);
+    void addTag(Set<Index> indexSet, Set<Tag> tagList);
 
     /**
      * Returns a Set of strings representing all the Tag(s) contained in the issues

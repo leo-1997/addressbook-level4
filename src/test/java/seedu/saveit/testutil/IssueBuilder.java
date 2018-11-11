@@ -31,6 +31,7 @@ public class IssueBuilder {
     private List<Solution> solutions;
     private Set<Tag> tags;
     private IssueSearchFrequency frequency;
+    private Timestamp createdTime;
     private Timestamp lastModifiedTime;
 
     public IssueBuilder() {
@@ -39,7 +40,8 @@ public class IssueBuilder {
         solutions = new ArrayList<>();
         tags = new LinkedHashSet<>();
         frequency = new IssueSearchFrequency(TypicalIssues.COMMON_ISSUE_FREQUENCY);
-        lastModifiedTime = new Timestamp(new Date().getTime());
+        createdTime = new Timestamp(new Date().getTime());
+        lastModifiedTime = createdTime;
     }
 
     /**
@@ -51,6 +53,7 @@ public class IssueBuilder {
         solutions = new ArrayList<>(issueToCopy.getSolutions());
         tags = new LinkedHashSet<>(issueToCopy.getTags());
         frequency = issueToCopy.getFrequency();
+        createdTime = issueToCopy.getCreatedTime();
         lastModifiedTime = issueToCopy.getLastModifiedTime();
     }
 
@@ -121,15 +124,11 @@ public class IssueBuilder {
     }
 
     /**
-     * Sets the {@code Timestamp} of the {@code Issue} that we are building.
+     * Create new Issue.
      */
-    public IssueBuilder withLastModifiedTime() {
-        this.lastModifiedTime = new Timestamp(new Date().getTime());
-        return this;
-    }
-
     public Issue build() {
-        return new Issue(statement, description, solutions, tags, frequency);
+        return new Issue(statement, description, solutions, tags, frequency,
+                new Timestamp(new Date().getTime()), lastModifiedTime);
     }
 
 }

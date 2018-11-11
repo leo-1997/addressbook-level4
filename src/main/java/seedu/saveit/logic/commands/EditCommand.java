@@ -10,7 +10,7 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -132,7 +132,8 @@ public class EditCommand extends Command {
         Description updatedDescription = editIssueDescriptor.getDescription().orElse(issueToEdit.getDescription());
         Set<Tag> updatedTags = editIssueDescriptor.getTags().orElse(issueToEdit.getTags());
 
-        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags);
+        return new Issue(updatedName, updatedDescription, updatedSolutions, updatedTags,
+                issueToEdit.getFrequency(), issueToEdit.getCreatedTime());
     }
 
     /**
@@ -150,11 +151,11 @@ public class EditCommand extends Command {
         Solution updatedSolution;
 
         SolutionLink updatedSolutionLink =
-                newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink()
-                        : newSolution.getLink();
+            newSolution.getLink().getValue().equals(DUMMY_SOLUTION_LINK) ? oldSolution.getLink()
+                : newSolution.getLink();
         Remark updatedSolutionRemark =
-                newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark()
-                        : newSolution.getRemark();
+            newSolution.getRemark().getValue().equals(DUMMY_SOLUTION_REMARK) ? oldSolution.getRemark()
+                : newSolution.getRemark();
 
         if (oldSolution.isPrimarySolution()) {
             updatedSolution = new PrimarySolution(updatedSolutionLink, updatedSolutionRemark);
@@ -197,6 +198,8 @@ public class EditCommand extends Command {
         private Solution solution;
 
         public EditIssueDescriptor() {
+            solutions = new ArrayList<>();
+            tags = new LinkedHashSet<>();
         }
 
         public EditIssueDescriptor(Index index, Solution solution) {
@@ -258,14 +261,15 @@ public class EditCommand extends Command {
         }
 
         public Optional<List<Solution>> getSolutions() {
-            return (solutions != null) ? Optional.of(Collections.unmodifiableList(solutions)) : Optional.empty();
+            return (solutions.size() != 0) ? Optional.of(Collections.unmodifiableList(solutions))
+                : Optional.of(new ArrayList<>());
         }
 
         /**
          * Sets {@code tags} to this object's {@code tags}. A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+            this.tags = (tags.size() != 0) ? new LinkedHashSet<>(tags) : new LinkedHashSet<>();
         }
 
         /**
@@ -273,7 +277,8 @@ public class EditCommand extends Command {
          * attempted. Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (tags.size() != 0) ? Optional.of(Collections.unmodifiableSet(tags))
+                : Optional.of(new LinkedHashSet<>());
         }
 
         @Override

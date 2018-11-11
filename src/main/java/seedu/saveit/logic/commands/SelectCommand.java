@@ -69,7 +69,7 @@ public class SelectCommand extends Command {
      * execute command for selecting a {@code Solution}
      */
     private CommandResult selectSolution(Model model, CommandHistory history) throws CommandException {
-        if (targetIndex.getZeroBased() >= model.getFilteredSolutionList().size()) {
+        if (targetIndex.getZeroBased() >= model.getFilteredAndSortedSolutionList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SOLUTION_DISPLAYED_INDEX + "\n" + MESSAGE_USAGE);
         }
         model.resetDirectory(new Directory(model.getCurrentDirectory().getIssue(), targetIndex.getOneBased()));

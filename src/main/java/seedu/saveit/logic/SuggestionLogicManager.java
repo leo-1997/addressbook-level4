@@ -69,7 +69,7 @@ public class SuggestionLogicManager implements SuggestionLogic {
     /**
      * Instantiates a {@code Suggestion} based on the {@code userInput}
      */
-    private Suggestion parseUserInput(String userInput) {
+    public Suggestion parseUserInput(String userInput) {
         Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
 
         if (!matcher.matches()) {

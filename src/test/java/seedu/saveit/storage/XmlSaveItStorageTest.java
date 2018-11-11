@@ -2,9 +2,9 @@ package seedu.saveit.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.HOON;
-import static seedu.saveit.testutil.TypicalIssues.IDA;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.MYSQL_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.POSTGRESQL_ERROR;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.io.IOException;
@@ -79,14 +79,14 @@ public class XmlSaveItStorageTest {
         assertEquals(original, new SaveIt(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addIssue(HOON);
-        original.removeIssue(ALICE);
+        original.addIssue(MYSQL_ERROR);
+        original.removeIssue(JAVA_NULL_POINTER);
         xmlSaveItStorage.saveSaveIt(original, filePath);
         readBack = xmlSaveItStorage.readSaveIt(filePath).get();
         assertEquals(original, new SaveIt(readBack));
 
         //Save and read without specifying file path
-        original.addIssue(IDA);
+        original.addIssue(POSTGRESQL_ERROR);
         xmlSaveItStorage.saveSaveIt(original); //file path not specified
         readBack = xmlSaveItStorage.readSaveIt().get(); //file path not specified
         assertEquals(original, new SaveIt(readBack));

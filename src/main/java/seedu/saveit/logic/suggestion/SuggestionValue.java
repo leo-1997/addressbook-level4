@@ -22,4 +22,11 @@ public class SuggestionValue {
     public String getResult() {
         return result;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        SuggestionValue otherValue = (SuggestionValue) other;
+
+        return otherValue.label.equals(label) && otherValue.result.equals(result);
+    }
 }

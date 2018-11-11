@@ -100,7 +100,8 @@ public class AddCommand extends Command {
         if (model.hasSolution(index, solutionToBeAdded)) {
             throw new CommandException(MESSAGE_DUPLICATE_SOLUTION);
         }
-        model.addSolution(index, solutionToBeAdded);
+        Issue issueToBeAdded = model.getFilteredAndSortedIssueList().get(index.getZeroBased());
+        model.addSolution(issueToBeAdded, solutionToBeAdded);
         model.commitSaveIt();
     }
 

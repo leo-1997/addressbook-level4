@@ -1,57 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <saveit>
     <issues>
-        <statement>Hans Muster</statement>
-        <description isPrivate="false">9482424</description>
+        <statement>Sort Command doesn't work</statement>
+        <description isPrivate="false">When input sort, the list doesn't change properly</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Ruth Mueller</statement>
         <description isPrivate="false">87249245</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Heinz Kurz</statement>
         <description isPrivate="false">95352563</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Cornelia Meier</statement>
         <description isPrivate="false">87652533</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Werner Meyer</statement>
         <description isPrivate="false">9482224</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Lydia Kunz</statement>
         <description isPrivate="false">9482427</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Anna Best</statement>
         <description isPrivate="false">9482442</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Stefan Meier</statement>
         <description isPrivate="false">8482424</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
     <issues>
         <statement>Martin Mueller</statement>
         <description isPrivate="false">8482131</description>
         <frequency>1</frequency>
-        <lastModifiedTime>1541509287278</lastModifiedTime>
+        <createdTime>1541509287278</createdTime>
+        <lastModifiedTime>1541609287278</lastModifiedTime>
     </issues>
 </saveit>

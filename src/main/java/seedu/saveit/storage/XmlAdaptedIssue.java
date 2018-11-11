@@ -2,7 +2,6 @@ package seedu.saveit.storage;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +40,9 @@ public class XmlAdaptedIssue {
     private Integer frequency;
 
     @XmlElement(required = true)
+    private Long createdTime;
+
+    @XmlElement(required = true)
     private Long lastModifiedTime;
 
     /**
@@ -52,24 +54,7 @@ public class XmlAdaptedIssue {
      * Constructs an {@code XmlAdaptedIssue} with the given statement details.
      */
     public XmlAdaptedIssue(String statement, String description, List<XmlAdaptedSolution> solutions,
-                           List<XmlAdaptedTag> tagged) {
-        this.statement = statement;
-        this.description = description;
-        if (solutions != null) {
-            this.solutions = new ArrayList<>(solutions);
-        }
-        if (tagged != null) {
-            this.tagged = new ArrayList<>(tagged);
-        }
-        this.frequency = 0;
-        this.lastModifiedTime = new Date().getTime();
-    }
-
-    /**
-     * Constructs an {@code XmlAdaptedIssue} with the given statement details.
-     */
-    public XmlAdaptedIssue(String statement, String description, List<XmlAdaptedSolution> solutions,
-                           List<XmlAdaptedTag> tagged, Integer frequency, Long lastModifiedTime) {
+                           List<XmlAdaptedTag> tagged, Integer frequency, Long createdTime, Long lastModifiedTime) {
         this.statement = statement;
         this.description = description;
         if (solutions != null) {
@@ -79,6 +64,7 @@ public class XmlAdaptedIssue {
             this.tagged = new ArrayList<>(tagged);
         }
         this.frequency = frequency;
+        this.createdTime = createdTime;
         this.lastModifiedTime = lastModifiedTime;
     }
 
@@ -97,6 +83,7 @@ public class XmlAdaptedIssue {
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
         frequency = source.getFrequency().getValue();
+        createdTime = source.getCreatedTime().getTime();
         lastModifiedTime = source.getLastModifiedTime().getTime();
     }
 
@@ -140,9 +127,12 @@ public class XmlAdaptedIssue {
 
         final IssueSearchFrequency searchFrequency = new IssueSearchFrequency(frequency);
 
-        final Timestamp modelTime = new Timestamp(lastModifiedTime);
+        final Timestamp modelCreatedTime = new Timestamp(createdTime);
 
-        return new Issue(modelName, modelDescription, modelSolutions, modelTags, searchFrequency, modelTime);
+        final Timestamp modelLastModifiedTime = new Timestamp(lastModifiedTime);
+
+        return new Issue(modelName, modelDescription, modelSolutions, modelTags, searchFrequency,
+                modelCreatedTime, modelLastModifiedTime);
     }
 
     @Override
@@ -161,6 +151,7 @@ public class XmlAdaptedIssue {
                 && solutions.equals(otherIssue.solutions)
                 && tagged.equals(otherIssue.tagged)
                 && frequency.equals(frequency)
+                && createdTime.equals(createdTime)
                 && lastModifiedTime.equals(lastModifiedTime);
     }
 }

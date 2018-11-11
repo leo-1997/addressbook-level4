@@ -95,17 +95,29 @@ is changed to issue level.
 ====
 * When an issue is selected, the directory is changed to `SaveIt/Issue */`. Then
 the user is not allowed to add, edit, or select issue.
+The change directory will be displayed in the UI as shown below.
 ====
-
-If the user is at the issue directory, the command load the web link
- of the indexed solution in the built-in browser.
-
 Format: `select INDEX`
 
 Example:
 ****
-* `select 5`
+.Direcotry Change
+image::directory-change.png[width="300"]
+.Select an Issue
+image::select issue.png[width="790"]
 ****
+If the user is at the issue directory, the command load the web link
+ of the indexed solution in the built-in browser.
+
+Example:
+****
+* `select 2`
+
+.Seleting a Solution
+image::select solution.png[width="790"]
+****
+
+
 
 [NOTE]
 ====
@@ -308,9 +320,9 @@ Examples: +
 ====
 
 
-=== Locating issues by statement or description: `(f)find`
+=== Locating issues by statement: `(f)find`
 
-Finds issues whose statement and description contain any of the given search queries.
+Finds issues whose statement contain any of the given search queries.
 
 Format: `find [KEYWORDS...]`
 
@@ -330,8 +342,8 @@ Examples:
 ====
 * The search is case-insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. ‘kill port’ will match ‘port kill’
-* Searches through the issue statement or description.
-* The keywords can partially match the statement or description.
+* Searches through the issue statement.
+* The keywords can partially match the statement.
 * Issues matching at least one keyword will be returned.
 * Searching the keyword will increment the search frequency of the issue (so that it can be ordered accordingly later on).
 ====
@@ -363,23 +375,24 @@ e.g `issue[cplusplus][segmentation]` will match with a single searched tag `[cpl
 
 === Returning to home directory  : `(h)home`
 
-Changes the current editing directory to the root directory. Besides, Shows a list of all issues in the issue list by index.
+Changes the current editing directory to the root directory. Besides,
+ Shows a list of all issues in the list panel by index.
 
 Format: `home`
-
-[TIP]
-====
-* Return to the home directory
-====
 
 Examples:
 ****
 * `home`
+
+.Return to Home Directory
+image::home.png[width="790"]
 ****
 
 [NOTE]
 ====
-* All issues are listed in chronological order by default in home directory.
+* All issues are listed in the list panel in home directory.
+* The following commands can only be executed at home directory:
+ `sort`, `addtag`, `refactortag`, `find`, `findtag`.
 ====
 
 === Undoing previous command : `(u)undo`

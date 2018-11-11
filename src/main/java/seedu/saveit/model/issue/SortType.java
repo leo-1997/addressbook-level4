@@ -7,7 +7,7 @@ import seedu.saveit.model.Issue;
 /**
  * Create respective Comparator based on the command inputted.
  */
-public class IssueSort {
+public class SortType {
     public static final String FREQUENCY_SORT = "freq";
     public static final String CHRONOLOGICAL_SORT = "chro";
     public static final String TAG_SORT = "tag";
@@ -19,7 +19,7 @@ public class IssueSort {
     private final Comparator<Issue> comparator;
     private final String sortType;
 
-    public IssueSort(String sortType) {
+    public SortType(String sortType) {
         switch (sortType) {
         case FREQUENCY_SORT:
             this.comparator = new IssueFreqComparator();
@@ -50,7 +50,7 @@ public class IssueSort {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof IssueSort // instanceof handles nulls
-                && sortType.equals(((IssueSort) other).sortType));
+                || (other instanceof SortType // instanceof handles nulls
+                && sortType.equals(((SortType) other).sortType));
     }
 }

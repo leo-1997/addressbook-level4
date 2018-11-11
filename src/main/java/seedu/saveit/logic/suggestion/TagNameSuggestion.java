@@ -16,7 +16,7 @@ import seedu.saveit.model.Model;
  */
 public class TagNameSuggestion implements Suggestion {
 
-    private static final String TAG_SUCCESS = "Existing Tag selected";
+    public static final String TAG_SUCCESS = "Existing Tag selected";
     private static final int WHITE_SPACE_OFFSET = 1;
 
     private Model model;

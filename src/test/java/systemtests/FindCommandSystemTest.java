@@ -3,10 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.saveit.commons.core.Messages.MESSAGE_ISSUES_LISTED_OVERVIEW;
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalIssues.BENSON;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
-import static seedu.saveit.testutil.TypicalIssues.DANIEL;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,28 +30,28 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         /* Case: find multiple issues in saveit book, command with leading spaces and trailing spaces
          * -> 2 issues found
          */
-        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, C_SEGMENTATION_FAULT, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where issue list is displaying the issues we are finding
          * -> 2 issues found
          */
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find issue where issue list is not displaying the issue we are finding -> 1 issue found */
         command = FindCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredList(expectedModel, CARL);
+        ModelHelper.setFilteredList(expectedModel, RUBY_HASH_BUG);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple issues in saveit book, 2 keywords -> 2 issues found */
         command = FindCommand.COMMAND_WORD + " Benson Daniel";
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, C_SEGMENTATION_FAULT, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -84,10 +84,10 @@ public class FindCommandSystemTest extends SaveItSystemTest {
 
         /* Case: find same issues in saveit book after deleting 1 of them -> 1 issue found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getSaveIt().getIssueList().contains(BENSON));
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        assertFalse(getModel().getSaveIt().getIssueList().contains(C_SEGMENTATION_FAULT));
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -114,12 +114,12 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find description number of issue in saveit book -> 0 issues found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getDescription().getValue();
+        command = FindCommand.COMMAND_WORD + " " + TRAVIS_BUILD.getDescription().getValue();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find tags of issue in saveit book -> 0 issues found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
+        List<Tag> tags = new ArrayList<>(TRAVIS_BUILD.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -128,17 +128,17 @@ public class FindCommandSystemTest extends SaveItSystemTest {
         showAllIssues();
         selectIssue(Index.fromOneBased(1));
         assertFalse(getIssueListPanel().getHandleToSelectedCard().getStatement()
-                .equals(DANIEL.getStatement().getValue()));
+                .equals(TRAVIS_BUILD.getStatement().getValue()));
         command = FindCommand.COMMAND_WORD + " Daniel";
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
         /* Case: find issue in empty saveit book -> 0 issues found */
         deleteAllIssues();
-        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MYSQL;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, TRAVIS_BUILD);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

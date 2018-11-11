@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.saveit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -48,7 +48,7 @@ public class ClearCommandSystemTest extends SaveItSystemTest {
 
         /* Case: filters the issue list before clearing -> entire saveit book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original saveit book
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

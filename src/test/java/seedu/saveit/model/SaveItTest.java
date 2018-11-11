@@ -4,13 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_STACKOVERFLOW;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.Rule;
@@ -51,10 +52,10 @@ public class SaveItTest {
     @Test
     public void resetData_withDuplicateIssues_throwsDuplicateIssueException() {
         // Two issues with the same identity fields
-        Issue editedAlice = new IssueBuilder(ALICE)
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER)
                 .withSolutions(SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
-        List<Issue> newIssues = Arrays.asList(ALICE, editedAlice);
+        List<Issue> newIssues = Arrays.asList(JAVA_NULL_POINTER, editedAlice);
         SaveItStub newData = new SaveItStub(newIssues);
 
         thrown.expect(DuplicateIssueException.class);
@@ -69,19 +70,19 @@ public class SaveItTest {
 
     @Test
     public void hasIssue_issueNotInSaveIt_returnsFalse() {
-        assertFalse(saveIt.hasIssue(ALICE));
+        assertFalse(saveIt.hasIssue(JAVA_NULL_POINTER));
     }
 
     @Test
     public void hasIssue_issueInSaveIt_returnsTrue() {
-        saveIt.addIssue(ALICE);
-        assertTrue(saveIt.hasIssue(ALICE));
+        saveIt.addIssue(JAVA_NULL_POINTER);
+        assertTrue(saveIt.hasIssue(JAVA_NULL_POINTER));
     }
 
     @Test
     public void hasIssue_issueWithSameIdentityFieldsInSaveIt_returnsTrue() {
-        saveIt.addIssue(ALICE);
-        Issue editedAlice = new IssueBuilder(ALICE)
+        saveIt.addIssue(JAVA_NULL_POINTER);
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER)
                 .withSolutions(SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
         assertTrue(saveIt.hasIssue(editedAlice));
@@ -112,6 +113,11 @@ public class SaveItTest {
         @Override
         public Directory getCurrentDirectory() {
             return new Directory(0, 0);
+        }
+
+        @Override
+        public Comparator<Issue> getCurrentSortType() {
+            return null;
         }
     }
 

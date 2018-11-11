@@ -5,6 +5,7 @@
         <statement>Hans Muster</statement>
         <description isPrivate="false">9482424</description>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <!-- Issue with invalid description field -->
@@ -12,6 +13,7 @@
         <statement>Hans Muster</statement>
         <description isPrivate="false"> </description>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
 </saveit>

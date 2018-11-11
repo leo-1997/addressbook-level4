@@ -76,26 +76,10 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> solutions} into a {@code Set<Solution>}.
      */
-    public static List<Solution> parseSolutions(String solutionLink, String solutionRemark) throws ParseException {
+    public static List<Solution> parseSolutions(String solutionLink, String solutionRemark) {
         requireAllNonNull(solutionLink, solutionRemark);
         final List<Solution> solutionList = new ArrayList<>();
-        if (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark)) {
-            return solutionList;
-        }
-        String trimmedSolutionLink = solutionLink.trim();
-        String trimmedRemark = solutionRemark.trim();
-        if (!SolutionLink.isValidLink(trimmedSolutionLink)) {
-            throw new ParseException(SolutionLink.MESSAGE_SOLUTION_LINK_CONSTRAINTS);
-        }
-        SolutionLink link = new SolutionLink(trimmedSolutionLink);
-
-        if (!Remark.isValidRemark(trimmedRemark)) {
-            throw new ParseException(Remark.MESSAGE_REMARK_CONSTRAINTS);
-        }
-
-        Remark remark = new Remark(trimmedRemark);
-
-        solutionList.add(new Solution(link, remark));
+        assert (solutionLink.equals(dummySolutionLink) && solutionRemark.equals(dummySolutionRemark));
         return solutionList;
     }
 

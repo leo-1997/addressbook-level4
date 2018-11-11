@@ -30,21 +30,24 @@ public class XmlUtilTest {
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validSaveIt.xml");
-    private static final Path MISSING_ISSUE_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingIssueField.xml");
+    private static final Path MISSING_ISSUE_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingStatementField.xml");
     private static final Path INVALID_ISSUE_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidIssueField.xml");
     private static final Path VALID_ISSUE_FILE = TEST_DATA_FOLDER.resolve("validIssue.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempSaveIt.xml");
 
     private static final String INVALID_DESCRIPTION = " ";
 
-    private static final String VALID_STATEMENT = "Hans Muster";
-    private static final String VALID_DESCRIPTION = "9482424";
+    private static final String VALID_STATEMENT = "Sort Command doesn't work";
+    private static final String VALID_DESCRIPTION = "When input sort, the list doesn't change properly";
     private static final List<XmlAdaptedSolution> VALID_SOLUTIONS = Collections
-            .singletonList(new XmlAdaptedSolution("webSite", "remark"));
+            .singletonList(new XmlAdaptedSolution(
+                    "https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/SortedList.html",
+                    "Use UI related class SortedList to update immediately"));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections
-            .singletonList(new XmlAdaptedTag("friends"));
+            .singletonList(new XmlAdaptedTag("UI"));
     private static final Integer VALID_FREQUENCY = 1;
-    private static final Long VALID_TIMESTAMP = new Long("1541509287278");
+    private static final Long VALID_CREATED_TIME = new Long("1541509287278");
+    private static final Long VALID_LASTMODIFIED_TIME = new Long("1541609287278");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -80,11 +83,12 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void xmlAdaptedIssueFromFile_fileWithMissingIssueField_validResult() throws Exception {
+    public void xmlAdaptedIssueFromFile_fileWithMissingStatementField_validResult() throws Exception {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
             MISSING_ISSUE_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
-                null, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
+                null, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS, VALID_FREQUENCY,
+                VALID_CREATED_TIME, VALID_LASTMODIFIED_TIME);
         assertEquals(expectedIssue, actualIssue);
     }
 
@@ -93,7 +97,8 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
             INVALID_ISSUE_FIELD_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
-                VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS, VALID_FREQUENCY, VALID_TIMESTAMP);
+                VALID_STATEMENT, INVALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS, VALID_FREQUENCY,
+                VALID_CREATED_TIME, VALID_LASTMODIFIED_TIME);
         assertEquals(expectedIssue, actualIssue);
     }
 
@@ -102,7 +107,8 @@ public class XmlUtilTest {
         XmlAdaptedIssue actualIssue = XmlUtil.getDataFromFile(
             VALID_ISSUE_FILE, XmlAdaptedIssueWithRootElement.class);
         XmlAdaptedIssue expectedIssue = new XmlAdaptedIssue(
-                VALID_STATEMENT, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS);
+                VALID_STATEMENT, VALID_DESCRIPTION, VALID_SOLUTIONS, VALID_TAGS, VALID_FREQUENCY,
+                VALID_CREATED_TIME, VALID_LASTMODIFIED_TIME);
         assertEquals(expectedIssue, actualIssue);
     }
 

@@ -1,5 +1,6 @@
 package seedu.saveit.logic;
 
+import seedu.saveit.logic.suggestion.Suggestion;
 import seedu.saveit.logic.suggestion.SuggestionResult;
 
 /**
@@ -9,6 +10,8 @@ import seedu.saveit.logic.suggestion.SuggestionResult;
 public interface SuggestionLogic {
 
     void updateCaretPosition(int position);
+
+    Suggestion parseUserInput(String input);
 
     SuggestionResult evaluate(String userInput);
 }

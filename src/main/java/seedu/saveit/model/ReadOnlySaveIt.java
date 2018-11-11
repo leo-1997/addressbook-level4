@@ -1,5 +1,7 @@
 package seedu.saveit.model;
 
+import java.util.Comparator;
+
 import javafx.collections.ObservableList;
 import seedu.saveit.commons.core.directory.Directory;
 
@@ -15,4 +17,6 @@ public interface ReadOnlySaveIt {
     ObservableList<Issue> getIssueList();
 
     Directory getCurrentDirectory();
+
+    Comparator<Issue> getCurrentSortType();
 }

@@ -50,4 +50,21 @@ public class SuggestionResult {
     public boolean validResult() {
         return values.size() > 0;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SuggestionResult)) {
+            return false;
+        }
+
+        SuggestionResult otherResult = (SuggestionResult) other;
+        return otherResult.values.equals(values)
+                && otherResult.oldValue.equals(oldValue)
+                && otherResult.startPosition == startPosition
+                && otherResult.endPosition == endPosition;
+    }
 }

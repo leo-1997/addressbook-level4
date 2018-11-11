@@ -20,9 +20,9 @@ import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.saveit.model.Model.PREDICATE_SHOW_ALL_ISSUES;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_SECOND_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.AMY;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -58,7 +58,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
                 + STATEMENT_DESC_C + " " + DESCRIPTION_DESC_C + " "
                 + SOLUTION_DESC_C + " " + TAG_DESC_UI + " ";
-        Issue editedIssue = new IssueBuilder(BOB).withTags(VALID_TAG_UI).build();
+        Issue editedIssue = new IssueBuilder(VALID_C_ISSUE).withTags(VALID_TAG_UI).build();
         assertCommandSuccess(command, index, editedIssue);
 
         /* Case: undo editing the last issue in the list -> last issue restored */
@@ -77,17 +77,17 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: edit a issue with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
-        assertCommandSuccess(command, index, BOB);
+        assertCommandSuccess(command, index, VALID_C_ISSUE);
 
         /* Case: edit an issue with new values same as another issue's values but with different name ->
         edited */
-        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(VALID_C_ISSUE));
         index = INDEX_SECOND_ISSUE;
 
-        assertNotEquals(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()), VALID_C_ISSUE);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_JAVA + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
-        editedIssue = new IssueBuilder(BOB).withStatement(VALID_STATEMENT_JAVA).build();
+        editedIssue = new IssueBuilder(VALID_C_ISSUE).withStatement(VALID_STATEMENT_JAVA).build();
         assertCommandSuccess(command, index, editedIssue);
 
         /* Case: edit an issue with new values same as another issue's values but with different description
@@ -96,7 +96,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         index = INDEX_SECOND_ISSUE;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
                 + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
-        editedIssue = new IssueBuilder(BOB).withDescription(VALID_DESCRIPTION_JAVA).build();
+        editedIssue = new IssueBuilder(VALID_C_ISSUE).withDescription(VALID_DESCRIPTION_JAVA).build();
         assertCommandSuccess(command, index, editedIssue);
 
         /* Case: clear tags -> cleared */
@@ -110,7 +110,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         ------------------------ */
 
         /* Case: filtered issue list, edit index within bounds of saveit book and issue list -> edited */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         index = INDEX_FIRST_ISSUE;
 
         assertTrue(index.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
@@ -122,7 +122,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, edit index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
 
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + STATEMENT_DESC_C,
@@ -142,7 +142,7 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new issue's name
-        assertCommandSuccess(command, index, AMY, index);
+        assertCommandSuccess(command, index, VALID_JAVA_ISSUE, index);
 
         /* --------------------------------- Performing invalid edit operation
         -------------------------------------- */
@@ -180,10 +180,10 @@ public class EditCommandSystemTest extends SaveItSystemTest {
             Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
 
         /* Case: edit a issue with new values same as another issue's values -> rejected */
-        executeCommand(IssueUtil.getAddCommand(BOB));
-        assertTrue(getModel().getSaveIt().getIssueList().contains(BOB));
+        executeCommand(IssueUtil.getAddCommand(VALID_C_ISSUE));
+        assertTrue(getModel().getSaveIt().getIssueList().contains(VALID_C_ISSUE));
         index = INDEX_FIRST_ISSUE;
-        assertFalse(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredAndSortedIssueList().get(index.getZeroBased()).equals(VALID_C_ISSUE));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + STATEMENT_DESC_C + DESCRIPTION_DESC_C
             + SOLUTION_DESC_C + CommandTestUtil.TAG_DESC_UI + TAG_DESC_UI;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ISSUE);

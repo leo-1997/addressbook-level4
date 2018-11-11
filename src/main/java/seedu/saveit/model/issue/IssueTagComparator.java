@@ -11,7 +11,9 @@ import seedu.saveit.model.Issue;
  */
 public class IssueTagComparator implements Comparator<Issue> {
     /**
-     * Compare Issue a and b with their first tag in the tag set. Tag is compared based on String tagName.
+     * Compare Issue a and b with their tags in the tag set. Tag is compared based on String tagName.
+     * Compare tags one by one until one tag set reach to the end. In that case, compare tag set size.
+     * If tag set size are the same as well, sort by created time.
      */
     public int compare(Issue a, Issue b) {
         Set<Tag> tagSetB = b.getTags();
@@ -34,6 +36,22 @@ public class IssueTagComparator implements Comparator<Issue> {
                 return tagA.compare(tagB);
             }
         }
-        return tagSetA.size() - tagSetB.size();
+        int sizeDiff = tagSetA.size() - tagSetB.size();
+
+        if (sizeDiff == 0) {
+            return a.getCreatedTime().compareTo(b.getCreatedTime());
+        } else {
+            return sizeDiff;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Tag";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other || other instanceof IssueTagComparator;
     }
 }

@@ -34,11 +34,12 @@ public class Issue {
     private final List<Solution> solutions = new ArrayList<>();
     private final Description description;
     private final IssueSearchFrequency frequency;
-    private final Timestamp lastModifiedTime;
     private final Set<Tag> tags = new LinkedHashSet<>();
+    private final Timestamp lastModifiedTime;
+    private final Timestamp createdTime;
 
     /**
-     * Every field must be present and not null.
+     * Initialize constructor for Issue. -> Add
      */
     public Issue(IssueStatement statement, Description description, List<Solution> solutions, Set<Tag> tags) {
         CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
@@ -47,50 +48,39 @@ public class Issue {
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = new IssueSearchFrequency(0);
-        this.lastModifiedTime = new Timestamp(new Date().getTime());
+        this.createdTime = new Timestamp(new Date().getTime());
+        this.lastModifiedTime = this.createdTime;
     }
 
     /**
-     * Overloaded constructor with additional {@code frequency} field
+     * Overloaded constructor with additional {@code frequency} and {@code createdTime} field -> Edit
      */
     public Issue(IssueStatement statement, Description description, List<Solution> solutions,
-            Set<Tag> tags, IssueSearchFrequency frequency) {
+                 Set<Tag> tags, IssueSearchFrequency frequency, Timestamp createdTime) {
         CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
         this.statement = statement;
         this.description = description;
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = frequency;
+        this.createdTime = createdTime;
         this.lastModifiedTime = new Timestamp(new Date().getTime());
     }
 
     /**
-     * Overloaded constructor with additional {@code frequency} field
+     * Overloaded constructor with additional {@code frequency},  {@code createdTime} and {@code lastModifiedTime} field
      */
     public Issue(IssueStatement statement, Description description, List<Solution> solutions,
-                 Set<Tag> tags, IssueSearchFrequency frequency, Timestamp lastModifiedTime) {
+                 Set<Tag> tags, IssueSearchFrequency frequency, Timestamp createdTime, Timestamp lastModifiedTime) {
         CollectionUtil.requireAllNonNull(statement, description, solutions, tags);
         this.statement = statement;
         this.description = description;
         this.solutions.addAll(solutions);
         this.tags.addAll(tags);
         this.frequency = frequency;
+        this.createdTime = createdTime;
         this.lastModifiedTime = lastModifiedTime;
     }
-
-    /**
-     * Overloaded constructor with additional {@code frequency} field
-     */
-    public Issue(Issue issue) {
-        CollectionUtil.requireAllNonNull(issue);
-        this.statement = issue.getStatement();
-        this.description = issue.getDescription();
-        this.solutions.addAll(issue.getSolutions());
-        this.tags.addAll(issue.getTags());
-        this.frequency = issue.getFrequency();
-        this.lastModifiedTime = new Timestamp(new Date().getTime());
-    }
-
 
     public IssueStatement getStatement() {
         return statement;
@@ -131,10 +121,17 @@ public class Issue {
     }
 
     /**
-     * Returns the Timestamp of the Issue
+     * Returns the Timestamp lastModifiedTime of the Issue
      */
     public Timestamp getLastModifiedTime() {
         return lastModifiedTime;
+    }
+
+    /**
+     * Returns the Timestamp createdTime of the Issue
+     */
+    public Timestamp getCreatedTime() {
+        return createdTime;
     }
 
     /**
@@ -175,12 +172,12 @@ public class Issue {
             PrimarySolution newPrimarySolution = new PrimarySolution(this.solutions.get(index));
             newSolutions.set(index, newPrimarySolution);
         }
-        return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency);
+        return new Issue(this.statement, this.description, newSolutions, this.tags, this.frequency,
+                this.createdTime, this.lastModifiedTime);
     }
 
     /**
-     * Returns true if both issues of the same statement have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two issues.Solution
+     * Returns true if both issues of the same statement.
      */
     public boolean isSameIssue(Issue otherIssue) {
         if (otherIssue == this) {
@@ -188,8 +185,7 @@ public class Issue {
         }
 
         return otherIssue != null
-                && otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getDescription().equals(getDescription());
+                && otherIssue.getStatement().equals(getStatement());
     }
 
     /**
@@ -207,8 +203,7 @@ public class Issue {
         }
 
         Issue otherIssue = (Issue) other;
-        return otherIssue.getStatement().equals(getStatement())
-                && otherIssue.getDescription().equals(getDescription());
+        return otherIssue.getStatement().equals(getStatement());
     }
 
     @Override

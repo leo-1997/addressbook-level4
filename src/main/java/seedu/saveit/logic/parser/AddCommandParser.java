@@ -63,7 +63,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Description description;
 
         if (argMultimap.getValue(PREFIX_STATEMENT).isPresent() && argMultimap.getValue(PREFIX_DESCRIPTION)
-                .isPresent()) {
+                    .isPresent()) {
             statement = ParserUtil.parseStatement(argMultimap.getValue(PREFIX_STATEMENT).get());
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {

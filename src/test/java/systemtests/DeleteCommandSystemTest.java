@@ -8,7 +8,7 @@ import static seedu.saveit.testutil.TestUtil.getIssue;
 import static seedu.saveit.testutil.TestUtil.getLastIndex;
 import static seedu.saveit.testutil.TestUtil.getMidIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -61,7 +61,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered issue list, delete index within bounds of saveit book and issue list -> deleted */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         Index index = INDEX_FIRST_ISSUE;
         assertTrue(index.getZeroBased() < getModel().getFilteredAndSortedIssueList().size());
         assertCommandSuccess(index);
@@ -69,7 +69,7 @@ public class DeleteCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, delete index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);

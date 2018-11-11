@@ -1,18 +1,22 @@
 package seedu.saveit.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_RACE_CONDITION_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_SEGMENTATION_FAULT_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.TRAVIS_BUILD_STATEMENT;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_SOLUTION;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.BENSON;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
-import static seedu.saveit.testutil.TypicalIssues.DANIEL;
-import static seedu.saveit.testutil.TypicalIssues.ELLE;
-import static seedu.saveit.testutil.TypicalIssues.FIONA;
-import static seedu.saveit.testutil.TypicalIssues.GEORGE;
+import static seedu.saveit.testutil.TypicalIssues.CHECKSTYLE_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.C_RACE_CONDITION;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.QUICKSORT_BUG;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.ArrayList;
@@ -31,8 +35,8 @@ import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
 import seedu.saveit.model.issue.Description;
 import seedu.saveit.model.issue.IssueContainsKeywordsPredicate;
-import seedu.saveit.model.issue.IssueSort;
 import seedu.saveit.model.issue.IssueStatement;
+import seedu.saveit.model.issue.SortType;
 import seedu.saveit.testutil.DirectoryBuilder;
 
 public class SortCommandTest {
@@ -48,52 +52,64 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortIsNotFiltered_success() {
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE),
+        assertEquals(
+                Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
+                        CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION),
                 model.getFilteredAndSortedIssueList());
+
     }
 
     @Test
     public void execute_sortIsFiltered_success() {
-        String[] keywordArray = {"Alice", "Benson", "Daniel", "Meyer"};
+        String[] keywordArray = {
+                JAVA_NULL_POINTER_STATEMENT.split("\\s+")[0],
+                C_SEGMENTATION_FAULT_STATEMENT.split("\\s+")[0],
+                TRAVIS_BUILD_STATEMENT.split("\\s+")[0],
+                C_RACE_CONDITION_STATEMENT.split("\\s+")[0]
+        };
+        // Filtered the issue list to the above 4 issues
         filterIssueList(keywordArray);
 
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, ELLE), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, C_RACE_CONDITION),
+                model.getFilteredAndSortedIssueList());
     }
 
     @Test
     public void execute_sortAfterUpdate_success() {
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, issueSort.getSortType());
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, sortType.getSortType());
         Issue issue = new Issue(new IssueStatement("new SOLUTION_C++ problem"),
                 new Description("only for test"), new ArrayList<>(), new HashSet<>());
 
-        expectedModel.updateFilteredAndSortedIssueList(issueSort.getComparator());
         expectedModel.addIssue(issue);
+        expectedModel.updateFilteredAndSortedIssueList(sortType.getComparator());
         model.addIssue(issue);
-        SortCommand command = new SortCommand(issueSort);
+        SortCommand command = new SortCommand(sortType);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE, issue),
+        assertEquals(Arrays.asList(C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, TRAVIS_BUILD, RUBY_HASH_BUG,
+                CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION, issue),
                 model.getFilteredAndSortedIssueList());
     }
 
     @Test
     public void execute_notUnderRootLevel_failure() {
         model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_FIRST_ISSUE).build());
-        IssueSort issueSort = prepareIssueSort(IssueSort.TAG_SORT);
-        SortCommand command = new SortCommand(issueSort);
+        SortType sortType = prepareIssueSort(SortType.TAG_SORT);
+        SortCommand command = new SortCommand(sortType);
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
 
         model.resetDirectory(new DirectoryBuilder().withIssueIndex(INDEX_THIRD_ISSUE)
+
                 .withSolutionIndex(INDEX_FIRST_SOLUTION).build());
         assertCommandFailure(command, model, commandHistory, Messages.MESSAGE_WRONG_DIRECTORY);
     }
@@ -101,8 +117,8 @@ public class SortCommandTest {
     /**
      * Parses {@code userInput} into a {@code Comparator<Issue>}.
      */
-    private IssueSort prepareIssueSort(String userInput) {
-        return new IssueSort(userInput);
+    private SortType prepareIssueSort(String userInput) {
+        return new SortType(userInput);
     }
 
     /**

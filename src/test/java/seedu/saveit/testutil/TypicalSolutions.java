@@ -7,6 +7,10 @@ import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_SOLUTION_LINK_STACKOVERFLOW;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.saveit.model.issue.Solution;
 
 /**
@@ -30,6 +34,11 @@ public class TypicalSolutions {
     public static final Solution SOLUTION_STACKOVERFLOW = new SolutionBuilder()
             .withLink(VALID_SOLUTION_LINK_STACKOVERFLOW).withRemark(VALID_REMARK_STACKOVERFLOW).build();
 
-    private TypicalSolutions() {} // prevents instantiation
+    private TypicalSolutions() {
+    } // prevents instantiation
 
+    public static List<Solution> getTypicalSolutions() {
+        return new ArrayList<>(Arrays.asList(SOLUTION_JAVA, SOLUTION_C,
+                SOLUTION_STACKOVERFLOW, SOLUTION_REPO, SOLUTION_GOOGLE, SOLUTION_REDDIT, SOLUTION_ZHIHU));
+    }
 }

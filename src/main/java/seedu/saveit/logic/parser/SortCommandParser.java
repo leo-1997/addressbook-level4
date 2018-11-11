@@ -7,7 +7,7 @@ import java.util.Set;
 import seedu.saveit.commons.core.Messages;
 import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.logic.parser.exceptions.ParseException;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -22,10 +22,10 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         Set<String> sortTypes = new HashSet<>();
-        sortTypes.add(IssueSort.EMPTY_SORT);
-        sortTypes.add(IssueSort.CHRONOLOGICAL_SORT);
-        sortTypes.add(IssueSort.FREQUENCY_SORT);
-        sortTypes.add(IssueSort.TAG_SORT);
+        sortTypes.add(SortType.EMPTY_SORT);
+        sortTypes.add(SortType.CHRONOLOGICAL_SORT);
+        sortTypes.add(SortType.FREQUENCY_SORT);
+        sortTypes.add(SortType.TAG_SORT);
 
         if (Arrays.asList(trimmedArgs.isEmpty()).size() > 1) {
             throw new ParseException(
@@ -37,7 +37,7 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        return new SortCommand(new IssueSort(trimmedArgs));
+        return new SortCommand(new SortType(trimmedArgs));
     }
 
     /**

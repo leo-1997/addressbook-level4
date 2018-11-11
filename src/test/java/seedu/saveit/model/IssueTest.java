@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_JAVA;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_TAG_UI;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_STACKOVERFLOW;
 
@@ -30,58 +30,58 @@ public class IssueTest {
     @Test
     public void isSameIssue() {
         // same object -> returns true
-        assertTrue(ALICE.isSameIssue(ALICE));
+        assertTrue(JAVA_NULL_POINTER.isSameIssue(JAVA_NULL_POINTER));
 
         // null -> returns false
-        assertFalse(ALICE.isSameIssue(null));
+        assertFalse(JAVA_NULL_POINTER.isSameIssue(null));
 
         // different description -> returns false
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(ALICE.isSameIssue(editedAlice));
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_JAVA).build();
+        assertTrue(JAVA_NULL_POINTER.isSameIssue(editedAlice));
 
         // different statement -> returns false
-        editedAlice = new IssueBuilder(ALICE).withStatement(VALID_STATEMENT_C).build();
-        assertFalse(ALICE.isSameIssue(editedAlice));
+        editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withStatement(VALID_STATEMENT_C).build();
+        assertFalse(JAVA_NULL_POINTER.isSameIssue(editedAlice));
 
         // same name, same description, different attributes -> returns true
-        editedAlice = new IssueBuilder(ALICE)
+        editedAlice = new IssueBuilder(JAVA_NULL_POINTER)
                 .withSolutions(SOLUTION_STACKOVERFLOW)
                 .withTags(VALID_TAG_UI).build();
-        assertTrue(ALICE.isSameIssue(editedAlice));
+        assertTrue(JAVA_NULL_POINTER.isSameIssue(editedAlice));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Issue aliceCopy = new IssueBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Issue aliceCopy = new IssueBuilder(JAVA_NULL_POINTER).build();
+        assertTrue(JAVA_NULL_POINTER.equals(aliceCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(JAVA_NULL_POINTER.equals(JAVA_NULL_POINTER));
 
-        // different description, same issue statement -> returns false
-        Issue editedAlice = new IssueBuilder(ALICE).withDescription(VALID_DESCRIPTION_JAVA).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different description, same issue statement -> returns true
+        Issue editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withDescription(VALID_DESCRIPTION_JAVA).build();
+        assertTrue(JAVA_NULL_POINTER.equals(editedAlice));
 
         // different solutions, same issue statement -> returns true
-        editedAlice = new IssueBuilder(ALICE).withSolutions(SOLUTION_C).build();
-        assertTrue(ALICE.equals(editedAlice));
+        editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withSolutions(SOLUTION_C).build();
+        assertTrue(JAVA_NULL_POINTER.equals(editedAlice));
 
         // different tags, same issue statement -> returns true
-        editedAlice = new IssueBuilder(ALICE).withTags(VALID_TAG_UI).build();
-        assertTrue(ALICE.equals(editedAlice));
+        editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withTags(VALID_TAG_UI).build();
+        assertTrue(JAVA_NULL_POINTER.equals(editedAlice));
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(JAVA_NULL_POINTER.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(JAVA_NULL_POINTER.equals(5));
 
         // different issue -> returns false
-        assertFalse(ALICE.equals(BOB));
+        assertFalse(JAVA_NULL_POINTER.equals(VALID_C_ISSUE));
 
         // different statement -> returns false
-        editedAlice = new IssueBuilder(ALICE).withStatement(VALID_STATEMENT_C).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new IssueBuilder(JAVA_NULL_POINTER).withStatement(VALID_STATEMENT_C).build();
+        assertFalse(JAVA_NULL_POINTER.equals(editedAlice));
 
     }
 }

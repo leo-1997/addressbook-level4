@@ -13,13 +13,13 @@ import static seedu.saveit.logic.commands.CommandTestUtil.TAG_DESC_UI;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_DESCRIPTION_C;
 import static seedu.saveit.logic.commands.CommandTestUtil.VALID_STATEMENT_C;
 import static seedu.saveit.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.AMY;
-import static seedu.saveit.testutil.TypicalIssues.BOB;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
-import static seedu.saveit.testutil.TypicalIssues.HOON;
-import static seedu.saveit.testutil.TypicalIssues.IDA;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
+import static seedu.saveit.testutil.TypicalIssues.MYSQL_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.POSTGRESQL_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.VALID_C_ISSUE;
+import static seedu.saveit.testutil.TypicalIssues.VALID_JAVA_ISSUE;
 import static seedu.saveit.testutil.TypicalSolutions.SOLUTION_C;
 
 import org.junit.Ignore;
@@ -52,7 +52,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         trailing spaces
          * -> added
          */
-        Issue toAdd = AMY;
+        Issue toAdd = VALID_JAVA_ISSUE;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + STATEMENT_DESC_JAVA + "  " + DESCRIPTION_DESC_JAVA
             + " " + SOLUTION_DESC_JAVA + "   " + CommandTestUtil.TAG_DESC_UI + " ";
         assertCommandSuccess(command, toAdd);
@@ -69,7 +69,7 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a issue with all fields same as another issue in the saveit book except name -> added */
-        toAdd = new IssueBuilder(AMY).withStatement(VALID_STATEMENT_C).build();
+        toAdd = new IssueBuilder(VALID_JAVA_ISSUE).withStatement(VALID_STATEMENT_C).build();
         command = AddCommand.COMMAND_WORD + STATEMENT_DESC_C + DESCRIPTION_DESC_JAVA
             + SOLUTION_DESC_JAVA + CommandTestUtil.TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
@@ -77,29 +77,29 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: add an issue with all fields same as another issue in the saveit book except description
          * -> added
          */
-        toAdd = new IssueBuilder(AMY).withDescription(VALID_DESCRIPTION_C).build();
+        toAdd = new IssueBuilder(VALID_JAVA_ISSUE).withDescription(VALID_DESCRIPTION_C).build();
         command = IssueUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty saveit book -> added */
         deleteAllIssues();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(JAVA_NULL_POINTER);
 
         /* Case: add an issue with tags, command with parameters in random order -> added */
-        toAdd = BOB;
+        toAdd = VALID_C_ISSUE;
         command = AddCommand.COMMAND_WORD + CommandTestUtil.TAG_DESC_UI + DESCRIPTION_DESC_C + SOLUTION_DESC_C
             + STATEMENT_DESC_C + TAG_DESC_UI;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an issue, missing tags -> added */
-        assertCommandSuccess(HOON);
+        assertCommandSuccess(MYSQL_ERROR);
 
         /* -------------------------- Perform add operation on the shown filtered list
         ------------------------------ */
 
         /* Case: filters the issue list before adding -> added */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(IDA);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
+        assertCommandSuccess(POSTGRESQL_ERROR);
 
         /* ------------------------ Perform add operation while an issue card is selected
         --------------------------- */
@@ -107,26 +107,26 @@ public class AddCommandSystemTest extends SaveItSystemTest {
         /* Case: selects first card in the issue list, add an issue -> added, card selection remains
         unchanged */
         selectIssue(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
+        assertCommandSuccess(RUBY_HASH_BUG);
 
         /* ----------------------------------- Perform invalid add operations
         --------------------------------------- */
 
         /* Case: add a duplicate issue -> rejected */
-        command = IssueUtil.getAddCommand(HOON);
+        command = IssueUtil.getAddCommand(MYSQL_ERROR);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: add a duplicate issue except with different description -> added */
-        toAdd = new IssueBuilder(HOON).withDescription(VALID_DESCRIPTION_C).build();
+        toAdd = new IssueBuilder(MYSQL_ERROR).withDescription(VALID_DESCRIPTION_C).build();
         assertCommandSuccess(toAdd);
 
         /* Case: add a duplicate issue except with different solution -> rejected */
-        toAdd = new IssueBuilder(HOON).withSolutions(SOLUTION_C).build();
+        toAdd = new IssueBuilder(MYSQL_ERROR).withSolutions(SOLUTION_C).build();
         command = IssueUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: add a duplicate issue except with different tags -> rejected */
-        command = IssueUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = IssueUtil.getAddCommand(MYSQL_ERROR) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_ISSUE);
 
         /* Case: missing statement -> rejected */

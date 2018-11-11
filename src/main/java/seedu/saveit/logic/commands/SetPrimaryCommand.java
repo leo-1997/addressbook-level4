@@ -44,7 +44,7 @@ public class SetPrimaryCommand extends Command {
         }
 
         Issue issueSelected = lastShownIssueList.get(currentDirectory.getIssue() - 1);
-        List<Solution> solutionList = model.getFilteredSolutionList();
+        List<Solution> solutionList = model.getFilteredAndSortedSolutionList();
         int zeroBasedIndex = index.getZeroBased();
 
         if (zeroBasedIndex < 0 || zeroBasedIndex >= solutionList.size()) {

@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.saveit.commons.core.Messages.MESSAGE_ISSUES_LISTED_OVERVIEW;
+import static seedu.saveit.logic.commands.CommandTestUtil.C_SEGMENTATION_FAULT_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.JAVA_NULL_POINTER_STATEMENT;
+import static seedu.saveit.logic.commands.CommandTestUtil.RUBY_HASH_BUG_STATEMENT;
 import static seedu.saveit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
-import static seedu.saveit.testutil.TypicalIssues.ELLE;
-import static seedu.saveit.testutil.TypicalIssues.FIONA;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.Arrays;
@@ -69,11 +72,15 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleIssuesFound() {
         String expectedMessage = String.format(MESSAGE_ISSUES_LISTED_OVERVIEW, 3);
-        IssueContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        IssueContainsKeywordsPredicate predicate = preparePredicate(
+                JAVA_NULL_POINTER_STATEMENT.split("\\s+")[0] + " "
+                + C_SEGMENTATION_FAULT_STATEMENT.split("\\s+")[0] + " "
+                + RUBY_HASH_BUG_STATEMENT.split("\\s+")[0]);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredIssueList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredAndSortedIssueList());
+        assertEquals(Arrays.asList(JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, RUBY_HASH_BUG),
+                model.getFilteredAndSortedIssueList());
     }
 
     /**

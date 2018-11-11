@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,15 +21,15 @@ import seedu.saveit.model.issue.Tag;
 import seedu.saveit.model.issue.solution.Remark;
 import seedu.saveit.testutil.Assert;
 
-@Ignore
 public class ParserUtilTest {
 
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_STATEMENT = " ";
     private static final String INVALID_DESCRIPTION = " ";
-    private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_LINK = " ";
+    private static final String INVALID_TAG = "my friend";
+    private static final String INVALID_REMARK = " ";
+    private static final String INVALID_LINK = "wwwstackoverflowcom";
 
-    private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_STATEMENT = "StackOverFlow";
     private static final String VALID_DESCRIPTION = "123456";
     private static final String VALID_REMARK = "This is a remark; this remark is #1.";
     private static final String VALID_TAG_1 = "friend";
@@ -65,26 +64,32 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
+    public void parseStatement_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseStatement((String) null));
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseStatement(INVALID_NAME));
+    public void parseStatement_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseStatement(INVALID_STATEMENT));
     }
 
     @Test
-    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
-        IssueStatement expectedName = new IssueStatement(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseStatement(VALID_NAME));
+    public void parseStatement_validValueWithoutWhitespace_returnsName() throws Exception {
+        IssueStatement expectedName = new IssueStatement(VALID_STATEMENT);
+        assertEquals(expectedName, ParserUtil.parseStatement(VALID_STATEMENT));
     }
 
     @Test
-    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
-        IssueStatement expectedName = new IssueStatement(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseStatement(nameWithWhitespace));
+    public void parseStatement_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String statementWithWhitespace = WHITESPACE + VALID_STATEMENT + WHITESPACE;
+        IssueStatement expectedName = new IssueStatement(VALID_STATEMENT);
+        assertEquals(expectedName, ParserUtil.parseStatement(statementWithWhitespace));
+    }
+
+    @Test
+    public void parseStatement_lengthExceedsLimit_throwsParseException() {
+        String longStatement = new String(new char[2]).replace("\0", VALID_STATEMENT);
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseStatement(longStatement));
     }
 
     @Test
@@ -115,10 +120,9 @@ public class ParserUtilTest {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseSolution((String) null, (String) null));
     }
 
-    @Ignore
     @Test
     public void parseSolutionLink_invalidValue_throwsParseException() {
-        //        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseSolutionLink((INVALID_LINK)));
     }
 
     @Test
@@ -128,10 +132,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
+    public void parseSolutionRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
         String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
         Remark expectedRemark = new Remark(VALID_REMARK);
-        //        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
+        assertEquals(expectedRemark, ParserUtil.parseSolutionRemark(remarkWithWhitespace));
     }
 
     @Test
@@ -182,5 +186,12 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTag_lengthExceedsLimit_throwsParseException() {
+        String longTag = new String(new char[4]).replace("\0", VALID_TAG_1);
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1,
+                VALID_TAG_2, longTag)));
     }
 }

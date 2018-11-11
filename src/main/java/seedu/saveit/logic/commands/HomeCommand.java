@@ -22,7 +22,7 @@ public class HomeCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         model.updateFilteredIssueList(Model.PREDICATE_SHOW_ALL_ISSUES);
         model.resetDirectory(new Directory(0, 0));
-        EventsCenter.getInstance().post(new DirectoryChangedEvent(new Directory(0, 0)));
+        EventsCenter.getInstance().post(new DirectoryChangedEvent(Directory.formRootDirectory()));
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

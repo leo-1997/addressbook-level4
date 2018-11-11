@@ -8,7 +8,7 @@ import static seedu.saveit.logic.commands.SelectCommand.MESSAGE_SELECT_ISSUE_SUC
 import static seedu.saveit.testutil.TestUtil.getLastIndex;
 import static seedu.saveit.testutil.TestUtil.getMidIndex;
 import static seedu.saveit.testutil.TypicalIndexes.INDEX_FIRST_ISSUE;
-import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MEIER;
+import static seedu.saveit.testutil.TypicalIssues.KEYWORD_MATCHING_MYSQL;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -59,7 +59,7 @@ public class SelectCommandSystemTest extends SaveItSystemTest {
         /* Case: filtered issue list, select index within bounds of saveit book but out of bounds of issue list
          * -> rejected
          */
-        showIssuesWithName(KEYWORD_MATCHING_MEIER);
+        showIssuesWithName(KEYWORD_MATCHING_MYSQL);
         int invalidIndex = getModel().getSaveIt().getIssueList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_ISSUE_DISPLAYED_INDEX);
 

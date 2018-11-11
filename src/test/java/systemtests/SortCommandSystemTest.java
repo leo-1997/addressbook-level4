@@ -1,15 +1,15 @@
 package systemtests;
 
-import static seedu.saveit.model.issue.IssueSort.CHRONOLOGICAL_SORT;
-import static seedu.saveit.model.issue.IssueSort.FREQUENCY_SORT;
-import static seedu.saveit.model.issue.IssueSort.TAG_SORT;
-import static seedu.saveit.testutil.TypicalIssues.ALICE;
-import static seedu.saveit.testutil.TypicalIssues.BENSON;
-import static seedu.saveit.testutil.TypicalIssues.CARL;
-import static seedu.saveit.testutil.TypicalIssues.DANIEL;
-import static seedu.saveit.testutil.TypicalIssues.ELLE;
-import static seedu.saveit.testutil.TypicalIssues.FIONA;
-import static seedu.saveit.testutil.TypicalIssues.GEORGE;
+import static seedu.saveit.model.issue.SortType.CHRONOLOGICAL_SORT;
+import static seedu.saveit.model.issue.SortType.FREQUENCY_SORT;
+import static seedu.saveit.model.issue.SortType.TAG_SORT;
+import static seedu.saveit.testutil.TypicalIssues.CHECKSTYLE_ERROR;
+import static seedu.saveit.testutil.TypicalIssues.C_RACE_CONDITION;
+import static seedu.saveit.testutil.TypicalIssues.C_SEGMENTATION_FAULT;
+import static seedu.saveit.testutil.TypicalIssues.JAVA_NULL_POINTER;
+import static seedu.saveit.testutil.TypicalIssues.QUICKSORT_BUG;
+import static seedu.saveit.testutil.TypicalIssues.RUBY_HASH_BUG;
+import static seedu.saveit.testutil.TypicalIssues.TRAVIS_BUILD;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import seedu.saveit.logic.commands.SelectCommand;
 import seedu.saveit.logic.commands.SortCommand;
 import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 
 public class SortCommandSystemTest extends SaveItSystemTest {
     @Test
@@ -31,41 +31,45 @@ public class SortCommandSystemTest extends SaveItSystemTest {
 
         /* Case: sort issues by tag sort in saveit book, command with leading spaces and trailing spaces */
         String command = "   " + SortCommand.COMMAND_WORD + " " + TAG_SORT + "   ";
-        ModelHelper.setSortedList(expectedModel, DANIEL, BENSON, ALICE, CARL, ELLE, FIONA, GEORGE);
-        assertCommandSuccess(command, IssueSort.TAG, expectedModel);
+        ModelHelper.setSortedList(expectedModel, TRAVIS_BUILD, C_SEGMENTATION_FAULT, JAVA_NULL_POINTER, RUBY_HASH_BUG,
+                CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION);
+        assertCommandSuccess(command, SortType.TAG, expectedModel);
 
         /* Case: repeat previous find command where issue list is displaying in the order we are using
          * -> no change
          */
         command = SortCommand.COMMAND_WORD + " " + TAG_SORT;
-        assertCommandSuccess(command, IssueSort.TAG, expectedModel);
+        assertCommandSuccess(command, SortType.TAG, expectedModel);
 
         /* Case: sort issues by default sort in saveit book */
         command = SortCommand.COMMAND_WORD;
-        ModelHelper.setSortedList(expectedModel, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE);
-        assertCommandSuccess(command, IssueSort.DEFAULT, expectedModel);
+        ModelHelper.setSortedList(expectedModel, JAVA_NULL_POINTER, C_SEGMENTATION_FAULT, RUBY_HASH_BUG, TRAVIS_BUILD,
+                CHECKSTYLE_ERROR, QUICKSORT_BUG, C_RACE_CONDITION);
+        assertCommandSuccess(command, SortType.DEFAULT, expectedModel);
 
         /* Case: sort issues by frequency sort in saveit book when frequency of all issues is the same
          * -> no change
          */
         command = SortCommand.COMMAND_WORD + " " + FREQUENCY_SORT;
-        assertCommandSuccess(command, IssueSort.FREQUENCY, expectedModel);
+        assertCommandSuccess(command, SortType.FREQUENCY, expectedModel);
 
         /* Case: update issue frequency. The issue list is updated accordingly. */
-        updateFrequency(ELLE, ELLE, CARL, GEORGE);
-        ModelHelper.setSortedList(expectedModel, ELLE, CARL, GEORGE, ALICE, BENSON, DANIEL, FIONA);
-        assertCommandSuccess(command, IssueSort.FREQUENCY, expectedModel);
+        updateFrequency(CHECKSTYLE_ERROR, CHECKSTYLE_ERROR, RUBY_HASH_BUG, C_RACE_CONDITION);
+        ModelHelper.setSortedList(expectedModel, CHECKSTYLE_ERROR, RUBY_HASH_BUG, C_RACE_CONDITION, JAVA_NULL_POINTER,
+                C_SEGMENTATION_FAULT, TRAVIS_BUILD, QUICKSORT_BUG);
+        assertCommandSuccess(command, SortType.FREQUENCY, expectedModel);
 
         /* Case: sort issues by chronological sort in saveit book when frequency of all issues is the same */
         command = SortCommand.COMMAND_WORD + " " + CHRONOLOGICAL_SORT;
-        ModelHelper.setSortedList(expectedModel, GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE);
-        assertCommandSuccess(command, IssueSort.CHRONOLOGICAL, expectedModel);
+        ModelHelper.setSortedList(expectedModel, C_RACE_CONDITION, QUICKSORT_BUG, CHECKSTYLE_ERROR, TRAVIS_BUILD,
+                RUBY_HASH_BUG, C_SEGMENTATION_FAULT, JAVA_NULL_POINTER);
+        assertCommandSuccess(command, SortType.CHRONOLOGICAL, expectedModel);
 
         /* Case: sort the filtered list */
-        filterList(ALICE, DANIEL, BENSON);
-        ModelHelper.setFilteredList(expectedModel, ALICE, DANIEL, BENSON);
-        ModelHelper.setSortedList(expectedModel, DANIEL, BENSON, ALICE);
-        assertCommandSuccess(command, IssueSort.CHRONOLOGICAL, expectedModel);
+        filterList(JAVA_NULL_POINTER, TRAVIS_BUILD, C_SEGMENTATION_FAULT);
+        ModelHelper.setFilteredList(expectedModel, JAVA_NULL_POINTER, TRAVIS_BUILD, C_SEGMENTATION_FAULT);
+        ModelHelper.setSortedList(expectedModel, TRAVIS_BUILD, C_SEGMENTATION_FAULT, JAVA_NULL_POINTER);
+        assertCommandSuccess(command, SortType.CHRONOLOGICAL, expectedModel);
 
         /* Case: invalid sort type
          * -> failure

@@ -14,8 +14,8 @@ import seedu.saveit.model.Model;
  */
 public class IssueNameSuggestion implements Suggestion {
 
-    private static final String STATEMENT_SUCCESS = "Existing Statement selected";
-    private static final int WHITE_SPACE_OFFSET = 1;
+    public static final String STATEMENT_SUCCESS = "Existing Statement selected";
+    public static final int WHITE_SPACE_OFFSET = 1;
 
     private Model model;
     private String argument;

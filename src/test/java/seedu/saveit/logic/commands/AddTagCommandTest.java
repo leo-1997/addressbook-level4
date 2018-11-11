@@ -12,14 +12,12 @@ import static seedu.saveit.testutil.TypicalIndexes.INDEX_THIRD_ISSUE;
 import static seedu.saveit.testutil.TypicalIssues.getTypicalSaveIt;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.saveit.commons.core.index.Index;
 import seedu.saveit.logic.CommandHistory;
-import seedu.saveit.model.Issue;
 import seedu.saveit.model.Model;
 import seedu.saveit.model.ModelManager;
 import seedu.saveit.model.UserPrefs;
@@ -45,9 +43,7 @@ public class AddTagCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
-        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
-
-        expectedModel.addTag(issueToEdit, tagSet);
+        expectedModel.addTag(indexSet, tagSet);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -68,9 +64,7 @@ public class AddTagCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
 
-        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
-
-        expectedModel.addTag(issueToEdit, tagSet);
+        expectedModel.addTag(indexSet, tagSet);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -95,8 +89,8 @@ public class AddTagCommandTest {
 
         String expectedMessage = AddTagCommand.MESSAGE_ADD_TAG_SUCCESS;
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
-        expectedModel.addTag(issueToEdit, tagSet);
+
+        expectedModel.addTag(indexSet, tagSet);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -119,8 +113,8 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
-        expectedModel.addTag(issueToEdit, tagSet);
+
+        expectedModel.addTag(indexSet, tagSet);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -139,8 +133,8 @@ public class AddTagCommandTest {
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
         String expectedMessage = String.format(AddTagCommand.MESSAGE_ADD_TAG_SUCCESS);
         ModelManager expectedModel = new ModelManager(model.getSaveIt(), new UserPrefs());
-        Set<Issue> issueToEdit = getIssueToEdit(indexSet, expectedModel);
-        expectedModel.addTag(issueToEdit, tagSet);
+
+        expectedModel.addTag(indexSet, tagSet);
         expectedModel.commitSaveIt();
 
         assertCommandSuccess(addTagCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -156,7 +150,6 @@ public class AddTagCommandTest {
         indexSet.add(INDEX_FIRST_ISSUE);
 
         AddTagCommand addTagCommand = new AddTagCommand(indexSet, tagSet);
-
         assertCommandFailure(addTagCommand, model, commandHistory, String.format(
             MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_DUPLICATE_TAG));
 
@@ -176,15 +169,5 @@ public class AddTagCommandTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagCommand.MESSAGE_ADD_TAG_HIGHER_BOUND_FAILURE);
 
         assertCommandFailure(addTagCommand, model, commandHistory, expectedMessage);
-    }
-
-
-    private Set<Issue> getIssueToEdit(Set<Index> indexSet, ModelManager expectedModel) {
-        Set<Issue> issueToEdit = new LinkedHashSet();
-        List<Issue> lastShownList = expectedModel.getFilteredAndSortedIssueList();
-        indexSet.forEach(issueIndex -> {
-            issueToEdit.add(lastShownList.get(issueIndex.getZeroBased()));
-        });
-        return issueToEdit;
     }
 }

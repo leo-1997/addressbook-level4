@@ -2,33 +2,36 @@
 <!-- SaveIt save file which contains the same Issue values as in TypicalIssues#getTypicalSaveIt() -->
 <saveit>
     <issues>
-        <statement>Alice Pauline</statement>
-        <description>94351253</description>
+        <statement>Java NullPointer</statement>
+        <description>Bug found in CS2103</description>
         <tagged>syntax</tagged>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <issues>
-        <statement>Benson Meier</statement>
-        <description>98765432</description>
-        <tagged>owesMoney</tagged>
-        <tagged>friends</tagged>
+        <statement>Segmentation Fault C++</statement>
+        <description>Found this in CS2106 Assignment</description>
+        <tagged>c++</tagged>
+        <tagged>bug</tagged>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <issues>
-        <statement>Carl Kurz</statement>
-        <description>95352563</description>
+        <statement>Ruby hash error</statement>
+        <description>For some reason my code is not working</description>
         <solutions>
             <solutionLink>https://github.com/CS2103-AY1819S1-T12-4/main</solutionLink>
             <remark>repoPage</remark>
         </solutions>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <issues>
-        <statement>Daniel Meier</statement>
-        <description>87652533</description>
+        <statement>Travis not building</statement>
+        <description>Tried to set up travis for 2103 project</description>
         <solutions>
             <solutionLink>https://stackoverflow.com/</solutionLink>
             <remark>newSolution</remark>>
@@ -39,36 +42,41 @@
         </solutions>
         <tagged>friends</tagged>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <issues>
-        <statement>Elle Meyer</statement>
-        <description>9482224</description>
+        <statement>Checkstyle error</statement>
+        <description>Checkstyle keeps showing error</description>
         <solutions>
             <solutionLink>http://www.google.com</solutionLink>
             <remark>ave</remark>>
         </solutions>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
+
     <issues>
-        <statement>Fiona Kunz</statement>
-        <description>9482427</description>
+        <statement>Quicksort bug</statement>
+        <description>My quicksort algorithm is not sorting correctly</description>
         <solutions>
             <solutionLink>http://www.reddit.com</solutionLink>
             <remark>tokyo</remark>>
         </solutions>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
     <issues>
-        <statement>George Best</statement>
-        <description>9482442</description>
+        <statement>Race Conditions</statement>
+        <description>Algorithm is having race condition problems.</description>
         <solutions>
             <solutionLink>http://www.yahoo.com</solutionLink>
             <remark>street</remark>>
         </solutions>
         <frequency>1</frequency>
+        <createdTime>1541509287278</createdTime>
         <lastModifiedTime>1541509287278</lastModifiedTime>
     </issues>
 </saveit>

@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import seedu.saveit.commons.core.Config;
 import seedu.saveit.commons.core.GuiSettings;
 import seedu.saveit.commons.core.LogsCenter;
+import seedu.saveit.commons.events.model.AddTagEvent;
 import seedu.saveit.commons.events.model.DirectoryChangedEvent;
 import seedu.saveit.commons.events.model.SaveItChangedEvent;
 import seedu.saveit.commons.events.ui.ExitAppRequestEvent;
@@ -220,8 +221,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        issueListPanelPlaceholder.getChildren().remove(issueListPanel.getRoot());
-        System.out.println(issueListPanelPlaceholder.getChildren().size());
+        issueListPanelPlaceholder.getChildren().clear();
         issueListPanelPlaceholder.getChildren().add(solutionListPanel.getRoot());
     }
 
@@ -232,11 +232,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleChangeDirectoryRequestEvent(DirectoryChangedEvent event) {
+    private void handleDirectoryChangedEvent(DirectoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.directory.isRootLevel()) {
-            issueListPanelPlaceholder.getChildren().remove(solutionListPanel.getRoot());
+            issueListPanelPlaceholder.getChildren().clear();
             issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
         }
+    }
+
+    @Subscribe
+    private void handleAddTagEvent(AddTagEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        issueListPanelPlaceholder.getChildren().clear();
+        issueListPanel = new IssueListPanel(logic.getFilteredAndSortedIssueList());
+        issueListPanelPlaceholder.getChildren().add(issueListPanel.getRoot());
     }
 }

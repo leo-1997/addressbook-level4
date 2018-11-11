@@ -518,15 +518,55 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
-=== New Command: Home
+=== Directory Level Model
 
-A new command--`home` is implemented to allow users to return to the root directory after editing a certain issue.
+SaveIt manages a list of issues, with each issue containing a list of solutions.
+ To manage the data with two-level structure, SaveIt implemented a directory model
+  in the Model component and UI component.
 
-=== GUI Enhancement
-The  figure below shows the expected GUI for SaveIt v1.3.
+==== Current Implementation
+Currently a directory class is maintained in `SaveIt`. It consist of `root` level and `issue` level.
+ The solution level is disabled for now as the complexity of current version of SaveIt
+  does not require the three-level directory system.
 
-.GUI Draft 1
-image::UI_Design.png[width="800"]
+===== Command Execution
+
+Before any command is executed,
+ it will query the current directory and determine the command result.
+  Some commands will have different command word and command result at different directory, such as:
+  `edit`, `add`. Some commands can only be executed at root level
+  , such as `sort`, `addtag`, `refactortag`, `find`, `findtag`.
+
+===== Home Command
+
+To traverse between `root` and `issue` level, a new command `home` is added to the command list.
+`home` Command changes the current directory to `root` level and post `DirectoryChangedEvent`,
+ which invokes the UI to load the issue list in the list panel. It is shown in the sequence
+ diagram below
+
+.Home Command Sequence Diagram
+image::HomeCommandSequenceDiagram.png[width="800"]
+
+==== Design Consideration
+===== Aspect: How to manage the issues and solutions with two-level structure
+
+* **Alternative 1 (current choice):** Implement a directory level model explicitly.
+
+** Pros: The data structure is clearer. Target users are familiar
+ with director level system, such as file system in Linux.
+
+** Cons: Changing directory may be inconvenient for users.
+
+* **Alternative 2:** Manage the issue-solution structure by specifying index in commands.
+
+** Pros: No need to change the previous structure.
+** Cons:The structure is not clear and the users may be confused.
+
+=== UI Enhancement
+The figure below shows the current UI for SaveIt v1.4.
+
+.SaveIt UI
+image::UI.png[width="800"]
 
 In the above figure, it is shown the left column displays the list of all issues,
  The column in the middle displays solutions of the selected issue. The blank part
@@ -537,12 +577,6 @@ In the above figure, it is shown the left column displays the list of all issues
 For SaveIt v1.4, The list of issues and list of solutions can be displayed in the same
  column, as shown below, Besides, the display panel will be used to display the website
  or the content of issue remark.
-
-.GUI Draft 2, scenario 1
-image::UI_Design1.png[width="800"]
-
-.GUI Draft 2, scenario 2
-image::UI_Design2.png[width="800"]
 
 
 // end::edit[]

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Issue with missing statement field -->
+<issue>
+    <description>When input sort, the list doesn't change properly</description>
+    <solutions>
+        <solutionLink>https://docs.oracle.com/javase/8/javafx/api/javafx/collections/transformation/SortedList.html</solutionLink>
+        <remark>Use UI related class SortedList to update immediately</remark>>
+    </solutions>
+    <tagged>UI</tagged>
+    <frequency>1</frequency>
+    <createdTime>1541509287278</createdTime>
+    <lastModifiedTime>1541609287278</lastModifiedTime>
+</issue>

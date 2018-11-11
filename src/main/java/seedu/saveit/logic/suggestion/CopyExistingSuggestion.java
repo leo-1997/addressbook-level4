@@ -20,8 +20,8 @@ import seedu.saveit.model.Model;
  */
 public class CopyExistingSuggestion implements Suggestion {
 
-    private static final String COPY_EXISTING_PROMPT = "Copy Existing...";
-    private static final String COPY_EXISTING_SUCCESS = "Existing value copied.";
+    public static final String COPY_EXISTING_PROMPT = "Copy Existing...";
+    public static final String COPY_EXISTING_SUCCESS = "Existing value copied.";
 
     private Model model;
     private Index index;
@@ -37,7 +37,7 @@ public class CopyExistingSuggestion implements Suggestion {
 
     @Override
     public SuggestionResult evaluate() {
-        String result = getValueFromIdentifier(startPrefix.getPrefix());
+        String result = getValueFromIdentifier(index, startPrefix.getPrefix());
         SuggestionValue value = new SuggestionValue(COPY_EXISTING_PROMPT, result);
         LinkedList<SuggestionValue> values = new LinkedList<>(Arrays.asList(value));
         int startPosition = startPrefix.getPosition() + startPrefix.getPrefix().length();
@@ -50,8 +50,12 @@ public class CopyExistingSuggestion implements Suggestion {
     /**
      * Get value based on identifier
      */
-    private String getValueFromIdentifier(String identifier) {
-        Issue issue = model.getFilteredAndSortedIssueList().get(index.getZeroBased());
+    public String getValueFromIdentifier(Index startIndex, String identifier) {
+        int listSize = model.getFilteredAndSortedIssueList().size();
+        if (listSize < startIndex.getOneBased()) {
+            return "";
+        }
+        Issue issue = model.getFilteredAndSortedIssueList().get(startIndex.getZeroBased());
 
         switch (identifier) {
 

@@ -7,7 +7,7 @@ import static seedu.saveit.logic.parser.CommandParserTestUtil.assertParseSuccess
 import org.junit.Test;
 
 import seedu.saveit.logic.commands.SortCommand;
-import seedu.saveit.model.issue.IssueSort;
+import seedu.saveit.model.issue.SortType;
 
 public class SortCommandParserTest {
     private SortCommandParser parser = new SortCommandParser();
@@ -16,7 +16,7 @@ public class SortCommandParserTest {
     @Test
     public void parse_emptyArg_returnsSortCommand() {
         SortCommand expectedSortCommand =
-                new SortCommand(new IssueSort(IssueSort.EMPTY_SORT));
+                new SortCommand(new SortType(SortType.EMPTY_SORT));
         assertParseSuccess(parser, "     ", expectedSortCommand);
     }
 
@@ -24,7 +24,7 @@ public class SortCommandParserTest {
     public void parse_oneValidArg_returnsSortCommand() {
         // no leading and trailing whitespaces
         SortCommand expectedSortCommand =
-                new SortCommand(new IssueSort(IssueSort.TAG_SORT));
+                new SortCommand(new SortType(SortType.TAG_SORT));
         assertParseSuccess(parser, "tag", expectedSortCommand);
 
         // has leading and trailing whitespaces
