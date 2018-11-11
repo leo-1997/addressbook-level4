@@ -23,7 +23,7 @@ The main features include:
 
 == Summary of contributions
 
-* *Major enhancement*: added the *solution filed to model structure along with enable the add command to add solution or issue*
+* *Major enhancement*: added the *solution field to model structure along with enable the add command to add solution or issue*
 ** What it does: It constitutes the basic model structure by adding new issue and new solution into SaveIt. This allows all the following features to be carried out in SaveIt.
 ** Justification: This feature improves the product significantly because a user can now add more issues and more solutions to the application. This is the most important and fundamental function our application aims to achieve.
 ** Highlights: This enhancement involved not only model component but also GUI, storage component in the application and it requires a lot of effort to build it properly. The add command on the other hand needs to handle different request in different directories.
